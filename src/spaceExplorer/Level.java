@@ -2,6 +2,8 @@ package spaceExplorer;
 
 import org.newdawn.slick.Input;
 
+//Should update automatically
+
 public class Level extends State {
     private static Level instance = null;
     private State nextState;
