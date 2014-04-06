@@ -1,6 +1,9 @@
 package spaceExplorer;
 
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.SlickException;
 
 public class MainMenu extends State {
     private static MainMenu instance = null;
@@ -16,16 +19,22 @@ public class MainMenu extends State {
     private MainMenu() {
         nextState = this;
     }
-    
+
+
     @Override
-    public void update(GameModel model, Input nput) {
+    public void init(GameContainer arg0) throws SlickException {
         // TODO Auto-generated method stub
         
     }
 
-    
     @Override
-    public void render() {
+    public void render(GameContainer arg0, Graphics arg1) throws SlickException {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void update(GameContainer arg0, int arg1) throws SlickException {
         // TODO Auto-generated method stub
         
     }
@@ -34,6 +43,20 @@ public class MainMenu extends State {
     public State nextState() {
         return nextState;
     }
+    
+    @Override
+    public boolean closeRequested() {
+        // TODO Auto-generated method stub
+        return false;
+    }
 
+    @Override
+    public String getTitle() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    
+    
    
 }
