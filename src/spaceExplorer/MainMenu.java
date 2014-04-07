@@ -21,42 +21,28 @@ public class MainMenu extends State {
     }
 
 
-    @Override
-    public void init(GameContainer arg0) throws SlickException {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void render(GameContainer arg0, Graphics arg1) throws SlickException {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void update(GameContainer arg0, int arg1) throws SlickException {
-        // TODO Auto-generated method stub
-        
-    }
 
     @Override
     public State nextState() {
         return nextState;
     }
-    
+
     @Override
-    public boolean closeRequested() {
+    public void init(GameContainer gc) {
         // TODO Auto-generated method stub
-        return false;
+        
     }
 
     @Override
-    public String getTitle() {
+    public void render(GameContainer gc, Graphics g, GameModel gm) {
         // TODO Auto-generated method stub
-        return null;
+        
     }
 
+    @Override
+    public void update(GameContainer gc, int delta, GameModel model) {
+        // TODO Auto-generated method stub
+        
+    }
     
-    
-   
 }

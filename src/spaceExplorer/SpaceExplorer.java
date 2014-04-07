@@ -2,18 +2,18 @@ package spaceExplorer;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Game;
+import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
-public class SpaceExplorer implements Game {
+public class SpaceExplorer extends BasicGame {
     private State state;
-    private GameModel gm;
+    private GameModel model;
 
     public SpaceExplorer() {
-        // Will be main menu in the final product
+        super("Space Explorer");
         state = Level.getInstance();
-        gm = GameModel.getInstance();
+        model = GameModel.getInstance();
     }
 
     public static void main(String[] args) {
@@ -27,30 +27,19 @@ public class SpaceExplorer implements Game {
     }
 
     @Override
-    public void init(GameContainer arg0) throws SlickException {
-        state.init(arg0);
+    public void init(GameContainer gc) throws SlickException {
+        state.init(gc);
     }
 
     @Override
-    public void render(GameContainer arg0, Graphics arg1) throws SlickException {
-        state.render(arg0, arg1);
+    public void render(GameContainer gc, Graphics g) throws SlickException {
+        state.render(gc, g, model);
     }
     
-    //TODO Update the game model too model
+    //TODO Update the game model too 
     @Override
-    public void update(GameContainer arg0, int arg1) throws SlickException {
-        state.update(arg0, arg1);
-    }
-
-    @Override
-    public boolean closeRequested() {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public String getTitle() {
-        return state.getTitle();
+    public void update(GameContainer gc, int delta) throws SlickException {
+        state.update(gc, delta, model);
     }
 
 }
