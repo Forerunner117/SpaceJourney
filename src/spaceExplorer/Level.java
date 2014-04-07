@@ -17,7 +17,7 @@ public class Level extends State {
         }
         return instance;
     }
-    
+        
     private Level() {
         nextState = this;
     }

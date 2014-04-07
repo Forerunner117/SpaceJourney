@@ -28,18 +28,18 @@ public class SpaceExplorer implements Game {
 
     @Override
     public void init(GameContainer arg0) throws SlickException {
-        // TODO decide what to put here.
-
+        state.init(arg0);
     }
 
     @Override
     public void render(GameContainer arg0, Graphics arg1) throws SlickException {
         state.render(arg0, arg1);
     }
-
+    
+    //TODO Update the game model too model
     @Override
     public void update(GameContainer arg0, int arg1) throws SlickException {
-
+        state.update(arg0, arg1);
     }
 
     @Override
@@ -50,8 +50,7 @@ public class SpaceExplorer implements Game {
 
     @Override
     public String getTitle() {
-        // TODO Auto-generated method stub
-        return null;
+        return state.getTitle();
     }
 
 }
