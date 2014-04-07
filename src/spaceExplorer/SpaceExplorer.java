@@ -19,7 +19,7 @@ public class SpaceExplorer extends BasicGame {
     public static void main(String[] args) {
         try {
             AppGameContainer app = new AppGameContainer(new SpaceExplorer());
-            app.setDisplayMode(500, 400, false);
+            app.setDisplayMode(900, 700, false);
             app.start();
         } catch (SlickException e) {
             e.printStackTrace();
