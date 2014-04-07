@@ -47,18 +47,23 @@ public class SpaceExplorer extends BasicGame {
         state.init(gc);
     }
 
-    /**
+    /** Gets called continuously in game loop. Delegates everything.
      * 
-     * @param gc
-     * @param g
-     * @throws SlickException
-     */
+     * @param gc GameContainer for various useful methods
+     * @param g Graphics object for drawing.
+     * @throws SlickException */
     @Override
     public void render(GameContainer gc, Graphics g) throws SlickException {
         state.render(gc, g, model);
         state = state.nextState();
     }
 
+    /** Gets called continuously in game loop. Updates the state which updates
+     * the model.
+     * 
+     * @param gc Game Container.
+     * @param delta - Time delay.
+     * @throws SlickException */
     @Override
     public void update(GameContainer gc, int delta) throws SlickException {
         state.update(gc, delta, model);

@@ -8,6 +8,10 @@ import org.newdawn.slick.SlickException;
 
 // Should update automatically
 
+/** The Level Class. Where the game fun happens. Will possibly be subclassed by
+ * other levels in the future.
+ * 
+ * @author Chris */
 public class Level extends State {
     private static Level instance = null;
     private State nextState;
@@ -15,6 +19,7 @@ public class Level extends State {
     private Image currentAstronaut;
     private Image levelWallpaper;
 
+    /** @return Singleton level instance. */
     public static Level getInstance() {
         if (instance == null) {
             instance = new Level();
@@ -22,6 +27,7 @@ public class Level extends State {
         return instance;
     }
 
+    /** Private constructor to initialize next state to this. */
     private Level() {
         nextState = this;
     }
@@ -33,7 +39,8 @@ public class Level extends State {
 
     @Override
     public void init(GameContainer gc) throws SlickException {
-        levelWallpaper = new Image("resources/levels/space-wallpaper-level1.jpg");
+        levelWallpaper = new Image(
+                "resources/levels/space-wallpaper-level1.jpg");
         astronautMan[0] = new Image("resources/astronautMan/frontStand.png");
         astronautMan[1] = new Image("resources/astronautMan/forLeft.png");
         astronautMan[2] = new Image("resources/astronautMan/forRight.png");
@@ -76,5 +83,5 @@ public class Level extends State {
         }
         model.sleep(7);
     }
-    
+
 }
