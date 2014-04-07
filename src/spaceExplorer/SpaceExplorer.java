@@ -6,37 +6,59 @@ import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
+/** @author Chris */
 public class SpaceExplorer extends BasicGame {
+
+    /** The width of the window. */
+    public static final int WIDTH = 900;
+    /** The height of the window. */
+    public static final int HEIGHT = 700;
+
     private State state;
     private GameModel model;
 
+    /** Get instance of all states */
     public SpaceExplorer() {
         super("Space Explorer");
         state = Level.getInstance();
         model = GameModel.getInstance();
     }
 
+    /** Start Game here
+     * 
+     * @param args */
     public static void main(String[] args) {
         try {
             AppGameContainer app = new AppGameContainer(new SpaceExplorer());
-            app.setDisplayMode(900, 700, false);
+            app.setDisplayMode(WIDTH, HEIGHT, false);
+            app.setShowFPS(false);
             app.start();
         } catch (SlickException e) {
             e.printStackTrace();
         }
     }
 
+    /** Gets called once before game loop
+     * 
+     * @param gc GameContainer that has various methods.
+     * @throws SlickException */
     @Override
     public void init(GameContainer gc) throws SlickException {
         state.init(gc);
     }
 
+    /**
+     * 
+     * @param gc
+     * @param g
+     * @throws SlickException
+     */
     @Override
     public void render(GameContainer gc, Graphics g) throws SlickException {
         state.render(gc, g, model);
+        state = state.nextState();
     }
-    
-    //TODO Update the game model too 
+
     @Override
     public void update(GameContainer gc, int delta) throws SlickException {
         state.update(gc, delta, model);

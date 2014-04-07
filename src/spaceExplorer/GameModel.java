@@ -25,6 +25,14 @@ public class GameModel {
     public int getY() {
         return y;
     }
+    
+    public void sleep(int millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * Do not Construct
