@@ -15,9 +15,9 @@ import org.newdawn.slick.SlickException;
 public class Level extends State {
     private static Level instance = null;
     private State nextState;
-    private Image[] astronautMan = new Image[12];
-    private Image currentAstronaut;
-    private Image levelWallpaper;
+    protected Image[] astronautMan = new Image[12];
+    protected Image currentAstronaut;
+    protected Image levelWallpaper;
 
     /** @return Singleton level instance. */
     public static Level getInstance() {
@@ -28,13 +28,17 @@ public class Level extends State {
     }
 
     /** Private constructor to initialize next state to this. */
-    private Level() {
+    protected Level() {
         nextState = this;
     }
 
     @Override
     public State nextState() {
         return nextState;
+    }
+
+    private void setNextState(State state) {
+        nextState = state;
     }
 
     @Override
