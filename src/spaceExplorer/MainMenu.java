@@ -2,8 +2,6 @@ package spaceExplorer;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
-import org.newdawn.slick.SlickException;
 
 public class MainMenu extends State {
     private static MainMenu instance = null;
