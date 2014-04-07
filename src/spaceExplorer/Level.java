@@ -13,6 +13,7 @@ public class Level extends State {
     private State nextState;
     private Image[] astronautMan = new Image[12];
     private Image currentAstronaut;
+    private Image levelWallpaper;
 
     public static Level getInstance() {
         if (instance == null) {
@@ -32,23 +33,25 @@ public class Level extends State {
 
     @Override
     public void init(GameContainer gc) throws SlickException {
-        astronautMan[0] = new Image("astronautMan/frontStand.png");
-        astronautMan[1] = new Image("astronautMan/forLeft.png");
-        astronautMan[2] = new Image("astronautMan/forRight.png");
-        astronautMan[3] = new Image("astronautMan/rightStand.png");
-        astronautMan[4] = new Image("astronautMan/rightRight.png");
-        astronautMan[5] = new Image("astronautMan/rightLeft.png");
-        astronautMan[6] = new Image("astronautMan/leftStand.png");
-        astronautMan[7] = new Image("astronautMan/leftRight.png");
-        astronautMan[8] = new Image("astronautMan/leftStand.png");
-        astronautMan[9] = new Image("astronautMan/backStand.png");
-        astronautMan[10] = new Image("astronautMan/backRight.png");
-        astronautMan[11] = new Image("astronautMan/backStand.png");
+        levelWallpaper = new Image("resources/levels/space-wallpaper-level1.jpg");
+        astronautMan[0] = new Image("resources/astronautMan/frontStand.png");
+        astronautMan[1] = new Image("resources/astronautMan/forLeft.png");
+        astronautMan[2] = new Image("resources/astronautMan/forRight.png");
+        astronautMan[3] = new Image("resources/astronautMan/rightStand.png");
+        astronautMan[4] = new Image("resources/astronautMan/rightRight.png");
+        astronautMan[5] = new Image("resources/astronautMan/rightLeft.png");
+        astronautMan[6] = new Image("resources/astronautMan/leftStand.png");
+        astronautMan[7] = new Image("resources/astronautMan/leftRight.png");
+        astronautMan[8] = new Image("resources/astronautMan/leftStand.png");
+        astronautMan[9] = new Image("resources/astronautMan/backStand.png");
+        astronautMan[10] = new Image("resources/astronautMan/backRight.png");
+        astronautMan[11] = new Image("resources/astronautMan/backStand.png");
         currentAstronaut = astronautMan[0];
     }
 
     @Override
     public void render(GameContainer gc, Graphics g, GameModel model) {
+        g.drawImage(levelWallpaper, 0, 0);
         g.drawImage(currentAstronaut, model.getX(), model.getY());
     }
 
