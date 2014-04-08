@@ -18,6 +18,11 @@ public class Level extends State {
     protected Image[] astronautMan = new Image[12];
     protected Image currentAstronaut;
     protected Image levelWallpaper;
+    /**
+     * The height of the sprite.
+     */
+    public static final int SPRITEHEIGHT = 32;
+    public static final int SPRITEWIDTH = 23;
 
     /** @return Singleton level instance. */
     public static Level getInstance() {

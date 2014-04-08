@@ -8,7 +8,7 @@ import org.newdawn.slick.SlickException;
 
 /** @author Chris */
 public class SpaceExplorer extends BasicGame {
-
+    
     /** The width of the window. */
     public static final int WIDTH = 900;
     /** The height of the window. */

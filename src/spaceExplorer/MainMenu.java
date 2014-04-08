@@ -28,7 +28,7 @@ public class MainMenu extends State {
 
     @Override
     public void init(GameContainer gc) {
-        // TODO Auto-generated method stub
+        // TODO 
 
     }
 
