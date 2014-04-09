@@ -23,10 +23,10 @@ public class GameModel {
      * @param x - x location in pixels
      * @param y - y location in pixels */
     public void setCoords(int x, int y) {
-        if(x > SpaceExplorer.WIDTH || x < 0) {
+        if(x > SpaceExplorer.WIDTH - Level.SPRITEWIDTH || x < 0) {
             return;
         }
-        if(y > SpaceExplorer.HEIGHT || y < 0) {
+        if(y > SpaceExplorer.HEIGHT - Level.SPRITEHEIGHT || y < 0) {
             return;
         }
         this.y = y;
