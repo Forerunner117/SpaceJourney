@@ -93,7 +93,7 @@ public class Level extends State {
             model.setCoords(model.getX(), model.getY() + 1);
         }
         if(model.getX() == 40){
-            setNextState(Level2.getInstance());
+            setNextState(MainMenu.getInstance());
         }
         model.sleep(7);
     }
