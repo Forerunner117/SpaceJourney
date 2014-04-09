@@ -11,7 +11,7 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="lib/lwjgl-2.9.1/jar/lwjgl.jar">
 		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="spaceExplorer/lib/lwjgl-2.9.1/native/macosx"/>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="spaceExplorer/lib/lwjgl-2.9.1/native/linux"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
