@@ -17,11 +17,10 @@ public class Level extends State {
     private State nextState;
     protected Image[] astronautMan = new Image[12];
     protected Image currentAstronaut;
-    protected Image levelWallpaper;
-    /**
-     * The height of the sprite.
-     */
+    private Image levelWallpaper;
+    /** The height of the sprite. */
     public static final int SPRITEHEIGHT = 32;
+    /** The Width of the sprite. */
     public static final int SPRITEWIDTH = 23;
 
     /** @return Singleton level instance. */
@@ -42,6 +41,9 @@ public class Level extends State {
         return nextState;
     }
 
+    /** Sets the next state.
+     * 
+     * @param state The state to set. */
     private void setNextState(State state) {
         nextState = state;
     }
@@ -89,6 +91,9 @@ public class Level extends State {
         if (input.isKeyDown(Input.KEY_DOWN)) {
             currentAstronaut = astronautMan[0];
             model.setCoords(model.getX(), model.getY() + 1);
+        }
+        if(model.getX() == 40){
+            setNextState(Level2.getInstance());
         }
         model.sleep(7);
     }

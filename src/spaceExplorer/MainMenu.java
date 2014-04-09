@@ -2,14 +2,11 @@ package spaceExplorer;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
 
 /** @author Chris */
 public class MainMenu extends State {
     private static MainMenu instance = null;
     private State nextState;
-    private Image levelWallpaper;
 
     /** @return Singleton instance of Main Menu. */
     public static MainMenu getInstance() {
@@ -31,19 +28,14 @@ public class MainMenu extends State {
 
     @Override
     public void init(GameContainer gc) {
-        try {
-            levelWallpaper = new Image(
-                    "resources/levels/space-wallpaper-level1.jpg");
-        } catch (SlickException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        // TODO 
 
     }
 
     @Override
     public void render(GameContainer gc, Graphics g, GameModel gm) {
-        g.drawImage(levelWallpaper, 0, 0);
+        // TODO Auto-generated method stub
+
     }
 
     @Override
