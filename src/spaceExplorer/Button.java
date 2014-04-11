@@ -21,7 +21,7 @@ public class Button {
      * @param actionHandler
      */
     public Button(int x, int y, int width, int height, Image buttonImage) {
-        buttonShape = new Rectangle(x, y, width, height)
+        buttonShape = new Rectangle(x, y, width, height);
     }
     
     /**
@@ -31,11 +31,12 @@ public class Button {
      */
     //where x and y define the location of the mouse cursor
     public boolean checkClick(int x, int y) {
-        return buttonShape.includes(x, y);
+        return buttonShape.contains(x, y);
     }
 
-    public render(Graphics g, ...) {
-        g.drawImage(image, x, y);
-        //other stuffs
-    }
+//    public render(Graphics g, ...) {
+//        g.drawImage(image, x, y);
+//        //other stuffs
+//    }
 }
+

@@ -26,17 +26,6 @@ public class MainMenu extends State {
     /** Private constructor to initialize next state to this. */
     private MainMenu() {
         nextState = this;
-        try {
-            levelWallpaper = new Image(
-                    "resources/levels/space-wallpaper-level1.jpg");
-            startButton = new Image("resources/buttons/startButton.png");
-            highScoreButton = new Image("resources/buttons/highScoreButton.png");
-            creditsButton = new Image("resources/buttons/creditsButton.png");
-            exitButton = new Image("resources/buttons/exitButton.png");
-        } catch (SlickException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
     }
 
     @Override
@@ -45,7 +34,13 @@ public class MainMenu extends State {
     }
 
     @Override
-    public void init(GameContainer gc) {
+    public void init(GameContainer gc) throws SlickException {
+        levelWallpaper = new Image(
+                "resources/levels/space-wallpaper-level1.jpg");
+        startButton = new Image("resources/buttons/startButton.png");
+        highScoreButton = new Image("resources/buttons/highScoreButton.png");
+        creditsButton = new Image("resources/buttons/creditsButton.png");
+        exitButton = new Image("resources/buttons/exitButton.png");
     }
 
     @Override
