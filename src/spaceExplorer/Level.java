@@ -92,6 +92,9 @@ public class Level extends State {
             currentAstronaut = astronautMan[0];
             model.setCoords(model.getX(), model.getY() + 1);
         }
+        if(model.getX() >= 100) {
+            setNextState(Level2.getInstance());
+        }
         // TODO find sensible platform independent way to delay the sprite
         // movement
         model.sleep(7);
