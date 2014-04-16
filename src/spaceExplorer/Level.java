@@ -82,7 +82,7 @@ public class Level extends State {
             model.setCoords(model.getX(), model.getY() + 1);
         }
         
-        model.sleep(gc.getFPS());
+        model.sleep(7);
     }
 
 }
