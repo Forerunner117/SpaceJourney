@@ -7,6 +7,7 @@ public class GameModel {
     // May add player, map, ect.
     private int x, y;
     private static GameModel instance = null;
+    private int spriteSpeed = 45;
 
     /** Get singleton instance of a game model.
      * 
@@ -47,9 +48,9 @@ public class GameModel {
      * 
      * @param millis - milliseconds */
     public void sleep(int fps) {
-        double secondDelay = fps/26;
+//        int delay = fps/spriteSpeed;
         try {
-            Thread.sleep(millis);
+            Thread.sleep(fps);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
