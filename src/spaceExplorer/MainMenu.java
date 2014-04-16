@@ -68,8 +68,8 @@ public class MainMenu extends State {
             if (x>280 && x<620 && y>100 && y<158) {
                 setNextState(LevelOne.getInstance());
             }
-        }                
-
+        }
+        
     }
 
 }

@@ -20,7 +20,7 @@ public class SpaceExplorer extends BasicGame {
     /** Get instance of all states */
     public SpaceExplorer() {
         super("Space Explorer");
-        state = LevelOne.getInstance();
+        state = MainMenu.getInstance();
         model = GameModel.getInstance();
     }
 
