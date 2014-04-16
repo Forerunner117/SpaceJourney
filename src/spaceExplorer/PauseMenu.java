@@ -6,31 +6,32 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
-/** @author Austin */
-public class MainMenu extends State {
-    private static MainMenu instance = null;
+/**
+ * @author Austin
+ *
+ */
+public class PauseMenu extends State {
+    private static PauseMenu instance = null;
     private State nextState;
     private Image levelWallpaper;    
-    private Image startImg;
-    private Image highScoreImg;
-    private Image creditsImg;
+    private Image resumeImg;
+    private Image mainMenuImg;
     private Image exitImg;
 
-    private Button startButton;
-    private Button highScoreButton;
-    private Button creditsButton;
+    private Button resumeButton;
+    private Button mainMenuButton;
     private Button exitButton;
     
-    /** @return Singleton instance of Main Menu. */
-    public static MainMenu getInstance() {
+    /** @return Singleton instance of Pause Menu. */
+    public static PauseMenu getInstance() {
         if (instance == null) {
-            instance = new MainMenu();
+            instance = new PauseMenu();
         }
         return instance;
     }
 
     /** Private constructor to initialize next state to this. */
-    private MainMenu() {
+    private PauseMenu() {
         nextState = this;
     }
 
@@ -47,24 +48,21 @@ public class MainMenu extends State {
     public void init(GameContainer gc) throws SlickException {
         levelWallpaper = new Image(
                 "resources/levels/space-wallpaper-level1.jpg");
-        startImg = new Image("resources/buttons/startButton.png");
-        highScoreImg = new Image("resources/buttons/highScoreButton.png");
-        creditsImg = new Image("resources/buttons/creditsButton.png");
+        resumeImg = new Image("resources/buttons/resumeButton.png");
+        mainMenuImg = new Image("resources/buttons/mainMenuButton.png");
         exitImg = new Image("resources/buttons/exitButton.png");
         
-        startButton = new Button(280, 100, 340, 58, startImg);
-        highScoreButton = new Button(274, 250, 352, 59, highScoreImg);        
-        creditsButton = new Button(301, 400, 297, 59, creditsImg);
-        exitButton = new Button(287, 550, 325, 59, exitImg);
+        resumeButton = new Button(280, 100, 340, 58, resumeImg);
+        mainMenuButton = new Button(280, 300, 326, 59, mainMenuImg);
+        exitButton = new Button(287, 500, 325, 59, exitImg);
     }
 
     @Override
     public void render(GameContainer gc, Graphics g, GameModel gm) {
         g.drawImage(levelWallpaper, 0, 0);
-        g.drawImage(startImg, 280, 100);
-        g.drawImage(highScoreImg, 274, 250);
-        g.drawImage(creditsImg, 301, 400);
-        g.drawImage(exitImg, 287, 550);
+        g.drawImage(resumeImg, 280, 100);
+        g.drawImage(mainMenuImg, 280, 300);
+        g.drawImage(exitImg, 287, 500);
     }
 
     @Override
@@ -75,16 +73,12 @@ public class MainMenu extends State {
             int x = input.getMouseX();
             int y = input.getMouseY();
                           
-            if (startButton.checkClick(x, y)){
+            if (resumeButton.checkClick(x, y)){
                 setNextState(LevelOne.getInstance());
             }
             
-            if(highScoreButton.checkClick(x, y)){
-                //setNextState(PauseMenu.getInstance());
-            }
-            
-            if(creditsButton.checkClick(x, y)){
-                //TODO: setNextState();
+            if (mainMenuButton.checkClick(x, y)){
+                setNextState(MainMenu.getInstance());
             }
             
             if(exitButton.checkClick(x, y)){

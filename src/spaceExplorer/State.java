@@ -7,7 +7,7 @@ import org.newdawn.slick.SlickException;
 /** State interface for implementing state pattern.
  * 
  * @author Chris */
-public abstract class State {
+public abstract class State {    
     /** @return the next state. */
     public abstract State nextState();
 
@@ -29,5 +29,5 @@ public abstract class State {
      * @param gc Game Container. Grab/set important game settings.
      * @param g Graphics object for drawing.
      * @param model model of the game. */
-    public abstract void render(GameContainer gc, Graphics g, GameModel model);
+    public abstract void render(GameContainer gc, Graphics g, GameModel model);      
 }

@@ -4,6 +4,10 @@ import java.awt.Rectangle;
 
 import org.newdawn.slick.Image;
 
+/**
+ * @author Austin
+ *
+ */
 public class Button {
     private int x;
     private int y;
