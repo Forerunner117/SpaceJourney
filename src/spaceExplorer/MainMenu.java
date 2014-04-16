@@ -3,6 +3,7 @@ package spaceExplorer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 /** @author Chris */
@@ -32,7 +33,11 @@ public class MainMenu extends State {
     public State nextState() {
         return nextState;
     }
-
+    
+    private void setNextState(State state){
+        nextState = state;
+    }
+    
     @Override
     public void init(GameContainer gc) throws SlickException {
         levelWallpaper = new Image(
@@ -54,7 +59,16 @@ public class MainMenu extends State {
 
     @Override
     public void update(GameContainer gc, int delta, GameModel model) {
-        // TODO Auto-generated method stub
+        Input input = gc.getInput();
+        
+        if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+            int x = input.getMouseX();
+            int y = input.getMouseY();
+    
+            if (x>280 && x<620 && y>100 && y<158) {
+                setNextState(LevelOne.getInstance());
+            }
+        }                
 
     }
 
