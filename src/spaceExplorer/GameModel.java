@@ -46,7 +46,8 @@ public class GameModel {
     /** Time to sleep the thread. Useful for slowing down sprite movement.
      * 
      * @param millis - milliseconds */
-    public void sleep(int millis) {
+    public void sleep(int fps) {
+        double secondDelay = fps/26;
         try {
             Thread.sleep(millis);
         } catch (InterruptedException e) {
