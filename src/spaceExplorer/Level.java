@@ -17,7 +17,6 @@ public class Level extends State {
     private State nextState;
     protected Image[] astronautMan = new Image[12];
     protected Image currentAstronaut;
-    private Image levelWallpaper;
     /** The height of the sprite. */
     public static final int SPRITEHEIGHT = 32;
     /** The Width of the sprite. */
@@ -31,7 +30,7 @@ public class Level extends State {
         return instance;
     }
 
-    /** Private constructor to initialize next state to this. */
+    /** Constructor to initialize next state to this. */
     protected Level() {
         nextState = this;
     }
@@ -41,17 +40,9 @@ public class Level extends State {
         return nextState;
     }
 
-    /** Sets the next state.
-     * 
-     * @param state The state to set. */
-    private void setNextState(State state) {
-        nextState = state;
-    }
 
     @Override
     public void init(GameContainer gc) throws SlickException {
-        levelWallpaper = new Image(
-                "resources/levels/space-wallpaper-level1.jpg");
         astronautMan[0] = new Image("resources/astronautMan/frontStand.png");
         astronautMan[1] = new Image("resources/astronautMan/forLeft.png");
         astronautMan[2] = new Image("resources/astronautMan/forRight.png");
@@ -69,7 +60,6 @@ public class Level extends State {
 
     @Override
     public void render(GameContainer gc, Graphics g, GameModel model) {
-        g.drawImage(levelWallpaper, 0, 0);
         g.drawImage(currentAstronaut, model.getX(), model.getY());
     }
 
@@ -91,9 +81,6 @@ public class Level extends State {
         if (input.isKeyDown(Input.KEY_DOWN)) {
             currentAstronaut = astronautMan[0];
             model.setCoords(model.getX(), model.getY() + 1);
-        }
-        if(model.getX() >= 100) {
-            setNextState(Level2.getInstance());
         }
         // TODO find sensible platform independent way to delay the sprite
         // movement
