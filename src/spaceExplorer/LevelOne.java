@@ -23,9 +23,7 @@ public class LevelOne extends Level {
     }
 
     @Override
-    public void init(GameContainer gc) throws SlickException {
-        levelWallpaper = new Image(
-                "resources/levels/space-wallpaper-level1.jpg");
+    public void init(GameContainer gc) throws SlickException {        
         parent.init(gc);
     }
 
@@ -54,6 +52,13 @@ public class LevelOne extends Level {
     }
 
     private LevelOne() {
+        try {
+            levelWallpaper = new Image(
+                    "resources/levels/space-wallpaper-level1.jpg");
+        } catch (SlickException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         nextState = this;
     }
 
