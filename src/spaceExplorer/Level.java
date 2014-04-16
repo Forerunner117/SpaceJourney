@@ -17,6 +17,8 @@ public class Level extends State {
     private State nextState;
     protected Image[] astronautMan = new Image[12];
     protected Image currentAstronaut;
+    protected int prevFrameRate;
+    protected int currFrameRate;
     /** The height of the sprite. */
     public static final int SPRITEHEIGHT = 32;
     /** The Width of the sprite. */
@@ -81,8 +83,9 @@ public class Level extends State {
             currentAstronaut = astronautMan[0];
             model.setCoords(model.getX(), model.getY() + 1);
         }
-        
-        model.sleep(7);
+        prevFrameRate = currFrameRate;
+        currFrameRate = gc.getFPS();
+        model.sleep(gc.getFPS());
     }
 
 }

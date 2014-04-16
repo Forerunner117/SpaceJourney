@@ -5,10 +5,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-/**
- * @author Chris
- *
- */
+/** @author Chris */
 public class LevelOne extends Level {
     private static LevelOne instance = null;
     private Image levelWallpaper;
@@ -23,7 +20,7 @@ public class LevelOne extends Level {
     }
 
     @Override
-    public void init(GameContainer gc) throws SlickException {        
+    public void init(GameContainer gc) throws SlickException {
         parent.init(gc);
     }
 

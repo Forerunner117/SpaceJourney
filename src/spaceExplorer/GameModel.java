@@ -7,7 +7,7 @@ public class GameModel {
     // May add player, map, ect.
     private int x, y;
     private static GameModel instance = null;
-    private int spriteSpeed = 45;
+    private int spriteSpeed = 30;
 
     /** Get singleton instance of a game model.
      * 
@@ -24,10 +24,10 @@ public class GameModel {
      * @param x - x location in pixels
      * @param y - y location in pixels */
     public void setCoords(int x, int y) {
-        if(x > SpaceExplorer.WIDTH - Level.SPRITEWIDTH || x < 0) {
+        if (x > SpaceExplorer.WIDTH - Level.SPRITEWIDTH || x < 0) {
             return;
         }
-        if(y > SpaceExplorer.HEIGHT - Level.SPRITEHEIGHT || y < 0) {
+        if (y > SpaceExplorer.HEIGHT - Level.SPRITEHEIGHT || y < 0) {
             return;
         }
         this.y = y;
@@ -44,13 +44,23 @@ public class GameModel {
         return y;
     }
 
+    /** @return the spriteSpeed. */
+    public int getSpriteSpeed() {
+        return spriteSpeed;
+    }
+
+    /** @param spriteSpeed the spriteSpeed to set. */
+    public void setSpriteSpeed(int spriteSpeed) {
+        this.spriteSpeed = spriteSpeed;
+    }
+
     /** Time to sleep the thread. Useful for slowing down sprite movement.
      * 
-     * @param millis - milliseconds */
+     * @param fps - Current frames per second. */
     public void sleep(int fps) {
-//        int delay = fps/spriteSpeed;
+        int delay = fps / spriteSpeed;
         try {
-            Thread.sleep(fps);
+            Thread.sleep(delay);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

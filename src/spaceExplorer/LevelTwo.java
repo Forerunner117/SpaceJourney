@@ -11,7 +11,7 @@ public class LevelTwo extends Level {
     private Level parent = Level.getInstance();
     private Image levelWallpaper;
     private State nextState;
-    
+
     /** @return An instance of Level2 */
     public static LevelTwo getInstance() {
         if (instance == null) {
@@ -25,20 +25,20 @@ public class LevelTwo extends Level {
         g.drawImage(levelWallpaper, 0, 0);
         g.drawImage(parent.currentAstronaut, model.getX(), model.getY());
     }
-    
+
     @Override
     public void update(GameContainer gc, int delta, GameModel model) {
-        //TODO set as getting the taco or whatever.
-        if(model.getX() > 200) {
+        // TODO set as getting the taco or whatever.
+        if (model.getX() > 200) {
             setNextState(this);
         }
         parent.update(gc, delta, model);
     }
-    
-    private void setNextState(State state){
+
+    private void setNextState(State state) {
         nextState = state;
     }
-    
+
     @Override
     public State nextState() {
         return nextState;
@@ -48,7 +48,8 @@ public class LevelTwo extends Level {
     private LevelTwo() {
         nextState = this;
         try {
-            levelWallpaper = new Image("resources/levels/space-wallpaper-level2.jpg");
+            levelWallpaper = new Image(
+                    "resources/levels/space-wallpaper-level2.jpg");
         } catch (SlickException e) {
             throw new RuntimeException();
         }
