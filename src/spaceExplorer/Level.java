@@ -40,7 +40,6 @@ public class Level extends State {
         return nextState;
     }
 
-
     @Override
     public void init(GameContainer gc) throws SlickException {
         astronautMan[0] = new Image("resources/astronautMan/frontStand.png");
@@ -82,9 +81,8 @@ public class Level extends State {
             currentAstronaut = astronautMan[0];
             model.setCoords(model.getX(), model.getY() + 1);
         }
-        // TODO find sensible platform independent way to delay the sprite
-        // movement
-        model.sleep(7);
+        
+        model.sleep(gc.getFPS());
     }
 
 }
