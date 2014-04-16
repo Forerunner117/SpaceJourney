@@ -56,8 +56,7 @@ public class LevelOne extends Level {
             levelWallpaper = new Image(
                     "resources/levels/space-wallpaper-level1.jpg");
         } catch (SlickException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            throw new RuntimeException();
         }
         nextState = this;
     }

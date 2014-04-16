@@ -45,6 +45,7 @@ public class SpaceExplorer extends BasicGame {
     @Override
     public void init(GameContainer gc) throws SlickException {
         state.init(gc);
+        Level.getInstance().init(gc);
     }
 
     /** Gets called continuously in game loop. Delegates everything.
