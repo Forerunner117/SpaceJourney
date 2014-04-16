@@ -33,10 +33,10 @@ public class Level2 extends Level {
     
     @Override
     public void update(GameContainer gc, int delta, GameModel model) {
-        parent.update(gc, delta, model);
-        if(model.getX() > 3 * SpaceExplorer.WIDTH / 4) {
+        if(model.getX() > 200) {
             setNextState(Level.getInstance());
         }
+        parent.update(gc, delta, model);
     }
     
     private void setNextState(State state){
@@ -49,8 +49,7 @@ public class Level2 extends Level {
         try {
             levelWallpaper = new Image("resources/levels/space-wallpaper-level2.jpg");
         } catch (SlickException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            throw new RuntimeException();
         }
     }
 
