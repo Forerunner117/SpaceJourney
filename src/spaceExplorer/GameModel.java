@@ -8,6 +8,8 @@ public class GameModel {
     private int x, y;
     private static GameModel instance = null;
     private int spriteSpeed = 30;
+    private double xVelocity;
+    private double yVelocity;
 
     /** Get singleton instance of a game model.
      * 
@@ -32,6 +34,26 @@ public class GameModel {
         }
         this.y = y;
         this.x = x;
+    }
+
+    /** @return the xVelocity. */
+    public double getxVelocity() {
+        return xVelocity;
+    }
+
+    /** @param vx the xVelocity to set. */
+    public void setxVelocity(double vx) {
+        this.xVelocity = vx;
+    }
+
+    /** @return the yVelocity. */
+    public double getyVelocity() {
+        return yVelocity;
+    }
+
+    /** @param yVelocity the yVelocity to set. */
+    public void setyVelocity(double yVelocity) {
+        this.yVelocity = yVelocity;
     }
 
     /** @return Sprite x position. */
