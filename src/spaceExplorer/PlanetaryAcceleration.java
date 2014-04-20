@@ -17,18 +17,18 @@ public class PlanetaryAcceleration {
     private double planetMass;
     private static final double G = 6.673e-11;
     private final double spaceFieldMaxWidth = spaceFieldConstant * WIDTH;
-    private final double spaceFieldMaxHeight = 350;//spaceFieldConstant * HEIGHT;
-    private final int simtime = 1;
+    private final double spaceFieldMaxHeight = spaceFieldConstant * HEIGHT;
+    private final int simtime = 5000;
 
-    public static void main(String[] args) {
-        PlanetaryAcceleration pa = new PlanetaryAcceleration(0, 0, 5.0);
-        System.out.println("Window is 900 x 700");
-        int[] c = new int[6];
-        c[0] = 0; c[1] = 450; c[2] = 900; c[3] = 122; c[4] = 755; c[5] = 23;
+//    public static void main(String[] args) {
+//        PlanetaryAcceleration pa = new PlanetaryAcceleration(0, 0, 5.0);
+//        System.out.println("Window is 900 x 700");
+//        int[] c = new int[6];
+//        c[0] = 0; c[1] = 450; c[2] = 900; c[3] = 122; c[4] = 755; c[5] = 23;
+////        pa.printTest(c);
+//        c[0] = 0; c[1] = 350; c[2] = 700; c[3] = 122; c[4] = 654; c[5] = 23;
 //        pa.printTest(c);
-        c[0] = 0; c[1] = 350; c[2] = 700; c[3] = 122; c[4] = 654; c[5] = 23;
-        pa.printTest(c);
-    }
+//    }
     
     private void printTest(int[] c){
         for (int i = 0; i < c.length; i++) {
@@ -62,10 +62,8 @@ public class PlanetaryAcceleration {
         double vx = gm.getxVelocity();
         double vy = gm.getyVelocity();
 
-        double sy = toWorld(y, 0, WIDTH, spaceFieldMaxWidth,
-                -spaceFieldMaxWidth);
-        double sx = toWorld(x, 0, HEIGHT, -spaceFieldMaxHeight,
-                spaceFieldMaxHeight);
+        double sy = toWorldY(y);
+        double sx = toWorldX(x);
 
         sy += vy * simtime;
         sx += vx * simtime;
@@ -73,20 +71,13 @@ public class PlanetaryAcceleration {
         vx += simtime * accx(sx, sy, planetXpos, planetYpos, planetMass);
         vy += simtime * accy(sx, sy, planetXpos, planetYpos, planetMass);
 
-        int px = toPixel(sx, -spaceFieldMaxWidth, spaceFieldMaxWidth, 0, WIDTH);
-        int py = toPixel(sy, spaceFieldMaxHeight, -spaceFieldMaxHeight, 0,
-                HEIGHT);
+        int px = toPixelX(sx);
+        int py = toPixelY(sy);
 
         gm.setxVelocity(vx);
         gm.setyVelocity(vy);
 
-        try {
-            Thread.sleep(30);
-        } catch (InterruptedException i) {
-            // TODO: handle exception
-        }
-
-        // gm.setCoords(px, py);
+         gm.setCoords(px, py);
         return new Point(px, py);
     }
 

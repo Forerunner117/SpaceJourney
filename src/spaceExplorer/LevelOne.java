@@ -12,7 +12,7 @@ public class LevelOne extends Level {
     private Image levelWallpaper;
     private Level parent = Level.getInstance();
     private State nextState;
-    private PlanetaryAcceleration pa = new PlanetaryAcceleration(SpaceExplorer.HEIGHT, SpaceExplorer.WIDTH, 3.2);
+    private PlanetaryAcceleration pa = new PlanetaryAcceleration(SpaceExplorer.HEIGHT/2, SpaceExplorer.WIDTH/2, 3.2e20);
     
     public static LevelOne getInstance() {
         if (instance == null) {
