@@ -8,8 +8,8 @@ public class GameModel {
     private int x, y;
     private static GameModel instance = null;
     private int spriteSpeed = 30;
-    private double xVelocity;
-    private double yVelocity;
+    private double xVelocity = 0;
+    private double yVelocity = 0;
 
     /** Get singleton instance of a game model.
      * 

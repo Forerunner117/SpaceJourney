@@ -11,19 +11,43 @@ import java.awt.Point;
  * 
  * @author Chris */
 public class PlanetaryAcceleration {
-    private int planetXpos;
-    private int planetYpos;
+    private static final double spaceFieldConstant = 5.0e8;
+    private final double planetXpos;
+    private final double planetYpos;
     private double planetMass;
     private static final double G = 6.673e-11;
-    private final double spaceFieldWidth = 5.0e8 * WIDTH;
-    private final double spaceFieldHeight = 5.0e8 * HEIGHT;
+    private final double spaceFieldMaxWidth = spaceFieldConstant * WIDTH;
+    private final double spaceFieldMaxHeight = 350;//spaceFieldConstant * HEIGHT;
     private final int simtime = 1;
 
+    public static void main(String[] args) {
+        PlanetaryAcceleration pa = new PlanetaryAcceleration(0, 0, 5.0);
+        System.out.println("Window is 900 x 700");
+        int[] c = new int[6];
+        c[0] = 0; c[1] = 450; c[2] = 900; c[3] = 122; c[4] = 755; c[5] = 23;
+//        pa.printTest(c);
+        c[0] = 0; c[1] = 350; c[2] = 700; c[3] = 122; c[4] = 654; c[5] = 23;
+        pa.printTest(c);
+    }
+    
+    private void printTest(int[] c){
+        for (int i = 0; i < c.length; i++) {
+            double world = toWorldX(c[i]);
+            System.out.println("x=" + c[i] + ".  worldX= "+world + ".  Back to pixels: x=" + toPixelX(world));
+        }
+        System.out.println("\n\n");
+        for (int i = 0; i < c.length; i++) {
+            double world = toWorldY(c[i]);
+            System.out.println("y=" + c[i] + ".  worldY= "+world + ".  Back to pixels: y=" + toPixelY(world));
+        }
+    }
+    
     /** @param x
      * @param y */
-    public PlanetaryAcceleration(int x, int y) {
-        planetXpos = x;
-        planetYpos = y;
+    public PlanetaryAcceleration(int x, int y, double planetMass) {
+        planetXpos = x;//toWorld(x, 0, WIDTH, -spaceFieldMaxWidth,                spaceFieldMaxWidth);
+        planetYpos = y;//toWorld(y, 0, HEIGHT, spaceFieldMaxHeight,                -spaceFieldMaxHeight);
+        this.planetMass = planetMass;
     }
 
     /** Using the mass of the planet, velocity, and the acceleration to gravity,
@@ -33,25 +57,36 @@ public class PlanetaryAcceleration {
      * @return the next x, y coordinates the object will be. */
     public Point nextPoint(GameModel gm) {
 
-        // px and py are the pixel coordinates of the ship.
-        int px, py;
         int y = gm.getY();
         int x = gm.getX();
         double vx = gm.getxVelocity();
         double vy = gm.getyVelocity();
 
-        y += vy * simtime;
-        x += vx * simtime;
+        double sy = toWorld(y, 0, WIDTH, spaceFieldMaxWidth,
+                -spaceFieldMaxWidth);
+        double sx = toWorld(x, 0, HEIGHT, -spaceFieldMaxHeight,
+                spaceFieldMaxHeight);
 
-        vx += simtime * accx(x, y, planetXpos, planetYpos, planetMass);
-        vy += simtime * accy(x, y, planetXpos, planetYpos, planetMass);
+        sy += vy * simtime;
+        sx += vx * simtime;
 
-        px = toPixel(x, -spaceFieldWidth, spaceFieldWidth, 0, WIDTH);
-        py = toPixel(y, spaceFieldHeight, -spaceFieldHeight, 0, HEIGHT);
+        vx += simtime * accx(sx, sy, planetXpos, planetYpos, planetMass);
+        vy += simtime * accy(sx, sy, planetXpos, planetYpos, planetMass);
+
+        int px = toPixel(sx, -spaceFieldMaxWidth, spaceFieldMaxWidth, 0, WIDTH);
+        int py = toPixel(sy, spaceFieldMaxHeight, -spaceFieldMaxHeight, 0,
+                HEIGHT);
 
         gm.setxVelocity(vx);
         gm.setyVelocity(vy);
 
+        try {
+            Thread.sleep(30);
+        } catch (InterruptedException i) {
+            // TODO: handle exception
+        }
+
+        // gm.setCoords(px, py);
         return new Point(px, py);
     }
 
@@ -89,23 +124,51 @@ public class PlanetaryAcceleration {
         return G * mass * dy / denominator;
     }
 
-    /** Converts space coordinates to pixels
+    /** Converts space coordinate to pixel coordinate.
      * 
-     * @param wx
-     * @param wmin
-     * @param wmax
-     * @param pmin
-     * @param pmax
-     * @return */
-    private int toPixel(double worldCoord, double worldMin, double worldMax,
-            int pixelMin, int pixelMax) {
+     * @param worldCoord - coordinate in space
+     * @param worldMin - minimum space coordinate
+     * @param worldMax - maximum space coordinate.
+     * @param pixelMin - minimum pixel
+     * @param pixelMax - maximimum pixel.
+     * @return the pixel coordinate. */
+    private int toPixelX(double worldCoord) {
 
         // ratio is variable that take world coordinates
         // an creates a value proportional in pixels
-        double ratio;
-        double result;
-        ratio = (pixelMax - pixelMin) / (worldMax - worldMin);
-        result = (worldCoord - worldMin) * ratio + pixelMin;
+        double ratio = (WIDTH) / (2 * spaceFieldMaxWidth);
+        double result = (worldCoord + spaceFieldMaxWidth) * ratio;
         return (int) result;// the int gets rid of the warning.
+    }
+
+    /** Converts space coordinate to pixel coordinate.
+     * 
+     * @param worldCoord - coordinate in space
+     * @param worldMin - minimum space coordinate
+     * @param worldMax - maximum space coordinate.
+     * @param pixelMin - minimum pixel
+     * @param pixelMax - maximimum pixel.
+     * @return the pixel coordinate. */
+    private int toPixelY(double worldCoord) {
+
+        // ratio is variable that take world coordinates
+        // an creates a value proportional in pixels
+        double ratio = (HEIGHT) / (-2 * spaceFieldMaxHeight);
+        double result = (worldCoord + spaceFieldMaxHeight) * ratio;
+        return (int) result;
+    }
+
+    private double toWorldX(double pixelCoord) {
+
+        double ratio = (spaceFieldMaxWidth * 2) / (WIDTH);
+        double result = (pixelCoord) * ratio - spaceFieldMaxWidth;
+        return result;
+    }
+
+    private double toWorldY(double pixelCoord) {
+        // Ratio might be negative too.
+        double ratio = (-spaceFieldMaxHeight * 2) / (HEIGHT);
+        double result = (pixelCoord) * ratio - spaceFieldMaxHeight;
+        return result;
     }
 }
