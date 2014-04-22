@@ -12,7 +12,7 @@ public class LevelOne extends Level {
     private Image levelWallpaper;
     private Level parent = Level.getInstance();
     private State nextState;
-    private PlanetaryAcceleration pa = new PlanetaryAcceleration(SpaceExplorer.HEIGHT/2, SpaceExplorer.WIDTH/2, 3.2e20);
+    private PhysicsEngine pa = new PhysicsEngine(SpaceExplorer.HEIGHT/2, SpaceExplorer.WIDTH/2, 3.2e25);
     
     public static LevelOne getInstance() {
         if (instance == null) {
@@ -35,13 +35,15 @@ public class LevelOne extends Level {
             int y = input.getMouseY();
             model.setCoords(x, y);
         }
-        System.out.println(pa.nextPoint(model));
+        pa.nextPoint(model);
+        
     }
 
     @Override
     public void render(GameContainer gc, Graphics g, GameModel model) {
         g.drawImage(levelWallpaper, 0, 0);
         g.drawImage(parent.currentAstronaut, model.getX(), model.getY());
+        pa.displayStats(g);
     }
 
     private void setNextState(State state) {

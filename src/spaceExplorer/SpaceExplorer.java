@@ -8,7 +8,7 @@ import org.newdawn.slick.SlickException;
 
 /** @author Chris */
 public class SpaceExplorer extends BasicGame {
-    
+
     /** The width of the window. */
     public static final int WIDTH = 900;
     /** The height of the window. */
@@ -32,6 +32,10 @@ public class SpaceExplorer extends BasicGame {
             AppGameContainer app = new AppGameContainer(new SpaceExplorer());
             app.setDisplayMode(WIDTH, HEIGHT, false);
             app.setShowFPS(false);
+            app.setTargetFrameRate(70);
+            System.out.println("App dimensions should be: " + WIDTH + " "
+                    + HEIGHT + "\nAre actually: " + app.getHeight() + " "
+                    + app.getWidth());
             app.start();
         } catch (SlickException e) {
             e.printStackTrace();

@@ -81,7 +81,7 @@ public class Level extends State {
             currentAstronaut = astronautMan[0];
             model.setCoords(model.getX(), model.getY() + 1);
         }
-        model.sleep(gc.getFPS());
+//        model.sleep(gc.getFPS());
     }
 
 }
