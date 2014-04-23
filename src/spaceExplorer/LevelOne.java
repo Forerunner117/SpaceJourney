@@ -36,10 +36,12 @@ public class LevelOne extends Level {
             model.setCoords(x, y);
         }
         
-        if (input.isKeyPressed(Input.KEY_ESCAPE)) {
-            this.setNextState(PauseMenu.getInstance());
-        }
+        
         pa.nextPoint(model);
+        
+        if (input.isKeyPressed(Input.KEY_ESCAPE)) {
+            setNextState(PauseMenu.getInstance());
+        }
         
     }
 
