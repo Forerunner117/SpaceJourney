@@ -35,6 +35,10 @@ public class LevelOne extends Level {
             int y = input.getMouseY();
             model.setCoords(x, y);
         }
+        
+        if (input.isKeyPressed(Input.KEY_ESCAPE)) {
+            this.setNextState(PauseMenu.getInstance());
+        }
         pa.nextPoint(model);
         
     }

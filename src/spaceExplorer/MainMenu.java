@@ -24,14 +24,32 @@ public class MainMenu extends State {
     /** @return Singleton instance of Main Menu. */
     public static MainMenu getInstance() {
         if (instance == null) {
-            instance = new MainMenu();
+            try {
+                instance = new MainMenu();
+            } catch (SlickException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
         return instance;
     }
 
-    /** Private constructor to initialize next state to this. */
-    private MainMenu() {
+    /** Private constructor to initialize next state to this. 
+     * @throws SlickException */
+    private MainMenu() throws SlickException {
         nextState = this;
+        
+        /*levelWallpaper = new Image(
+                "resources/levels/space-wallpaper-level1.jpg");
+        startImg = new Image("resources/buttons/startButton.png");
+        highScoreImg = new Image("resources/buttons/highScoreButton.png");
+        creditsImg = new Image("resources/buttons/creditsButton.png");
+        exitImg = new Image("resources/buttons/exitButton.png");
+        
+        startButton = new Button(280, 100, 340, 58, startImg);
+        highScoreButton = new Button(274, 250, 352, 59, highScoreImg);        
+        creditsButton = new Button(301, 400, 297, 59, creditsImg);
+        exitButton = new Button(287, 550, 325, 59, exitImg);*/
     }
 
     @Override
@@ -61,10 +79,10 @@ public class MainMenu extends State {
     @Override
     public void render(GameContainer gc, Graphics g, GameModel gm) {
         g.drawImage(levelWallpaper, 0, 0);
-        g.drawImage(startImg, 280, 100);
-        g.drawImage(highScoreImg, 274, 250);
-        g.drawImage(creditsImg, 301, 400);
-        g.drawImage(exitImg, 287, 550);
+        g.drawImage(startButton.getButtonImage(), startButton.getX(), startButton.getY());
+        g.drawImage(highScoreButton.getButtonImage(), highScoreButton.getX(), highScoreButton.getY());
+        g.drawImage(creditsButton.getButtonImage(), creditsButton.getX(), creditsButton.getY());
+        g.drawImage(exitButton.getButtonImage(), exitButton.getX(), exitButton.getY());
     }
 
     @Override
@@ -80,11 +98,11 @@ public class MainMenu extends State {
             }
             
             if(highScoreButton.checkClick(x, y)){
-                //setNextState(PauseMenu.getInstance());
+                //TODO: setNextState(HighScore.getInstance());
             }
             
             if(creditsButton.checkClick(x, y)){
-                //TODO: setNextState();
+                //TODO: setNextState(Credits.getInstance());
             }
             
             if(exitButton.checkClick(x, y)){

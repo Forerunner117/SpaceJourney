@@ -16,6 +16,18 @@ public class Button {
     private Image buttonImage;
     private Rectangle buttonShape;
     
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public Image getButtonImage() {
+        return buttonImage;
+    }
+
     /**
      * @param x
      * @param y
@@ -26,6 +38,11 @@ public class Button {
      */
     public Button(int x, int y, int width, int height, Image buttonImage) {
         buttonShape = new Rectangle(x, y, width, height);
+        this.buttonImage = buttonImage;
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
     }
     
     /**
@@ -36,11 +53,7 @@ public class Button {
     //where x and y define the location of the mouse cursor
     public boolean checkClick(int x, int y) {
         return buttonShape.contains(x, y);
-    }
+    }   
 
-//    public render(Graphics g, ...) {
-//        g.drawImage(image, x, y);
-//        //other stuffs
-//    }
 }
 

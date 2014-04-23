@@ -80,7 +80,7 @@ public class Level extends State {
         if (input.isKeyDown(Input.KEY_DOWN)) {
             currentAstronaut = astronautMan[0];
             model.setCoords(model.getX(), model.getY() + 1);
-        }
+        }        
 //        model.sleep(gc.getFPS());
     }
 

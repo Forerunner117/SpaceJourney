@@ -25,14 +25,29 @@ public class PauseMenu extends State {
     /** @return Singleton instance of Pause Menu. */
     public static PauseMenu getInstance() {
         if (instance == null) {
-            instance = new PauseMenu();
+            try {
+                instance = new PauseMenu();
+            } catch (SlickException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
         return instance;
     }
 
-    /** Private constructor to initialize next state to this. */
-    private PauseMenu() {
+    /** Private constructor to initialize next state to this. 
+     * @throws SlickException */
+    private PauseMenu() throws SlickException {
         nextState = this;
+        levelWallpaper = new Image(
+                "resources/levels/space-wallpaper-level1.jpg");
+        resumeImg = new Image("resources/buttons/resumeButton.png");
+        mainMenuImg = new Image("resources/buttons/mainMenuButton.png");
+        exitImg = new Image("resources/buttons/exitButton.png");
+        
+        resumeButton = new Button(309, 100, 283, 58, resumeImg);
+        mainMenuButton = new Button(287, 300, 326, 59, mainMenuImg);
+        exitButton = new Button(288, 500, 325, 59, exitImg);
     }
 
     @Override
@@ -46,23 +61,23 @@ public class PauseMenu extends State {
     
     @Override
     public void init(GameContainer gc) throws SlickException {
-        levelWallpaper = new Image(
+        /*levelWallpaper = new Image(
                 "resources/levels/space-wallpaper-level1.jpg");
         resumeImg = new Image("resources/buttons/resumeButton.png");
         mainMenuImg = new Image("resources/buttons/mainMenuButton.png");
         exitImg = new Image("resources/buttons/exitButton.png");
         
-        resumeButton = new Button(280, 100, 340, 58, resumeImg);
-        mainMenuButton = new Button(280, 300, 326, 59, mainMenuImg);
-        exitButton = new Button(287, 500, 325, 59, exitImg);
+        resumeButton = new Button(309, 100, 283, 58, resumeImg);
+        mainMenuButton = new Button(287, 300, 326, 59, mainMenuImg);
+        exitButton = new Button(288, 500, 325, 59, exitImg);*/
     }
 
     @Override
     public void render(GameContainer gc, Graphics g, GameModel gm) {
         g.drawImage(levelWallpaper, 0, 0);
-        g.drawImage(resumeImg, 280, 100);
-        g.drawImage(mainMenuImg, 280, 300);
-        g.drawImage(exitImg, 287, 500);
+        g.drawImage(resumeButton.getButtonImage(), resumeButton.getX(), resumeButton.getY());
+        g.drawImage(mainMenuButton.getButtonImage(), mainMenuButton.getX(), mainMenuButton.getY());
+        g.drawImage(exitButton.getButtonImage(), exitButton.getX(), exitButton.getY());
     }
 
     @Override
