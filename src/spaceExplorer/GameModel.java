@@ -1,11 +1,16 @@
 package spaceExplorer;
 
+import static spaceExplorer.SpaceExplorer.HEIGHT;
+import static spaceExplorer.SpaceExplorer.WIDTH;
+import static spaceExplorer.PhysicsEngine.SPACEHEIGHT;
+import static spaceExplorer.PhysicsEngine.SPACEWIDTH;
+
 /** A class that knows various aspects of the game.
  * 
  * @author Chris */
 public class GameModel {
     // May add player, map, ect.
-    private int x, y;
+    private double x = 0, y = 0;
     private static GameModel instance = null;
     private int spriteSpeed = 30;
     private double xVelocity = 0;
@@ -21,6 +26,7 @@ public class GameModel {
         return instance;
     }
 
+    //TODO get rid of the method.
     /** Set sprite x y coordinates in pixels.
      * 
      * @param x - x location in pixels
@@ -57,15 +63,22 @@ public class GameModel {
     }
 
     /** @return Sprite x position. */
-    public int getX() {
+    public double getX() {
         return x;
     }
 
     /** @return Sprite y position. */
-    public int getY() {
+    public double getY() {
         return y;
     }
 
+    public int getPixelX() {
+        return toPixelX(x);
+    }
+    
+    public int getPixelY() {
+        return toPixelY(y);
+    }
     /** @return the spriteSpeed. */
     public int getSpriteSpeed() {
         return spriteSpeed;
@@ -74,6 +87,32 @@ public class GameModel {
     /** @param spriteSpeed the spriteSpeed to set. */
     public void setSpriteSpeed(int spriteSpeed) {
         this.spriteSpeed = spriteSpeed;
+    }
+
+    /** Converts space coordinate to pixel coordinate.
+     * 
+     * @param worldCoord - coordinate in space
+     * @return the pixel coordinate. */
+    private int toPixelX(double worldCoord) {
+
+        // ratio is variable that take world coordinates
+        // an creates a value proportional in pixels
+        double ratio = (WIDTH) / (2 * SPACEWIDTH);
+        double result = (worldCoord + SPACEWIDTH) * ratio;
+        return (int) result;// the int gets rid of the warning.
+    }
+
+    /** Converts space coordinate to pixel coordinate.
+     * 
+     * @param worldCoord - coordinate in space
+     * @return the pixel coordinate. */
+    private int toPixelY(double worldCoord) {
+
+        // ratio is variable that take world coordinates
+        // an creates a value proportional in pixels
+        double ratio = (HEIGHT) / (2 * SPACEHEIGHT);
+        double result = (worldCoord - SPACEHEIGHT) * ratio;
+        return (int) -result;
     }
 
     /** Time to sleep the thread. Useful for slowing down sprite movement.

@@ -59,7 +59,7 @@ public class Level extends State {
 
     @Override
     public void render(GameContainer gc, Graphics g, GameModel model) {
-        g.drawImage(currentAstronaut, model.getX(), model.getY());
+        g.drawImage(currentAstronaut, model.getPixelX(), model.getPixelY());
     }
 
     @Override
@@ -67,19 +67,19 @@ public class Level extends State {
         Input input = gc.getInput();
         if (input.isKeyDown(Input.KEY_UP)) {
             currentAstronaut = astronautMan[9];
-            model.setCoords(model.getX(), model.getY() - 1);
+            model.setCoords(model.getPixelX(), model.getPixelY() - 1);
         }
         if (input.isKeyDown(Input.KEY_LEFT)) {
             currentAstronaut = astronautMan[6];
-            model.setCoords(model.getX() - 1, model.getY());
+            model.setCoords(model.getPixelX() - 1, model.getPixelY());
         }
         if (input.isKeyDown(Input.KEY_RIGHT)) {
             currentAstronaut = astronautMan[3];
-            model.setCoords(model.getX() + 1, model.getY());
+            model.setCoords(model.getPixelX() + 1, model.getPixelY());
         }
         if (input.isKeyDown(Input.KEY_DOWN)) {
             currentAstronaut = astronautMan[0];
-            model.setCoords(model.getX(), model.getY() + 1);
+            model.setCoords(model.getPixelX(), model.getPixelY() + 1);
         }        
 //        model.sleep(gc.getFPS());
     }

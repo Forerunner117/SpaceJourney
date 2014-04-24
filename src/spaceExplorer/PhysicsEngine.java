@@ -13,14 +13,17 @@ import org.newdawn.slick.Graphics;
  * 
  * @author Chris */
 public class PhysicsEngine {
-    private static final double spaceFieldConstant = 5.0e6;
+    /** Space is 72x bigger then the screen. */
+    private static final double spaceFieldConstant = 72;
     private final double planetXpos;
     private final double planetYpos;
     private double planetMass;
     private static final double G = 6.673e-11;
-    private final double spaceFieldMaxWidth = spaceFieldConstant * WIDTH;
-    private final double spaceFieldMaxHeight = spaceFieldConstant * HEIGHT;
-    private final int simtime = 50000;
+    /** The width of space */
+    public static final double SPACEWIDTH = spaceFieldConstant * WIDTH;
+    /** The Height of Space*/
+    public static final double SPACEHEIGHT = spaceFieldConstant * HEIGHT;
+    private final int simtime = 1;
     private double xAccel;
     private double yAccel;
     private double sy, sx;
@@ -35,7 +38,7 @@ public class PhysicsEngine {
         c[3] = 122;
         c[4] = 755;
         c[5] = 23;
-         pa.printTest(c);
+        pa.printTest(c);
         c[0] = 0;
         c[1] = 350;
         c[2] = 700;
@@ -43,8 +46,9 @@ public class PhysicsEngine {
         c[4] = 654;
         c[5] = 23;
         pa.printTest(c);
-        
-//        System.out.println("0,0 to pixel is " + pa.toPixelX(0) + " " + pa.toPixelY());
+
+        // System.out.println("0,0 to pixel is " + pa.toPixelX(0) + " " +
+        // pa.toPixelY());
     }
 
     private void printTest(int[] c) {
@@ -64,11 +68,13 @@ public class PhysicsEngine {
     /** @param x
      * @param y */
     public PhysicsEngine(int x, int y, double planetMass) {
-        planetXpos =  toWorldX(x);
+        planetXpos = toWorldX(x);
         planetYpos = toWorldY(y);
         this.planetMass = planetMass;
     }
 
+
+    
     /** Using the mass of the planet, velocity, and the acceleration to gravity,
      * calculate the next point the object will go in pixels.
      * 
@@ -76,16 +82,13 @@ public class PhysicsEngine {
      * @return the next x, y coordinates the object will be. */
     public Point nextPoint(GameModel gm) {
 
-        int y = gm.getY();
-        int x = gm.getX();
+        double y = gm.getY();
+        double x = gm.getX();
         double vx = gm.getxVelocity();
         double vy = gm.getyVelocity();
 
-         sy = toWorldY(y);
-         sx = toWorldX(x);
-
-         xAccel = accx(sx, sy, planetXpos, planetYpos, planetMass);
-         yAccel = accy(sx, sy, planetXpos, planetYpos, planetMass);
+        xAccel = accx(x, y, planetXpos, planetYpos, planetMass);
+        yAccel = accy(x, y, planetXpos, planetYpos, planetMass);
 
         vx += simtime * xAccel;
         vy += simtime * yAccel;
@@ -93,16 +96,11 @@ public class PhysicsEngine {
         sy += vy * simtime;
         sx += vx * simtime;
 
-        int px = toPixelX(sx);
-        int py = toPixelY(sy);
-        
-        System.out.println("sx to px: " + sx + "->" + px + " px to sx: " + px + "->" + sx);
-        
         gm.setxVelocity(vx);
         gm.setyVelocity(vy);
 
-        gm.setCoords(px, py);
-        return new Point(px, py);
+        gm.setCoords(x, y);
+        return new Point(x, y);
     }
 
     /** Calculates acceleration due to gravity of the star on the the object in
@@ -139,54 +137,7 @@ public class PhysicsEngine {
         return G * mass * dy / denominator;
     }
 
-    /** Converts space coordinate to pixel coordinate.
-     * 
-     * @param worldCoord - coordinate in space
-     * @param worldMin - minimum space coordinate
-     * @param worldMax - maximum space coordinate.
-     * @param pixelMin - minimum pixel
-     * @param pixelMax - maximimum pixel.
-     * @return the pixel coordinate. */
-    private int toPixelX(double worldCoord) {
-
-        // ratio is variable that take world coordinates
-        // an creates a value proportional in pixels
-        double ratio = (WIDTH) / (2 * spaceFieldMaxWidth);
-        double result = (worldCoord + spaceFieldMaxWidth) * ratio;
-        return (int) result;// the int gets rid of the warning.
-    }
-
-    /** Converts space coordinate to pixel coordinate.
-     * 
-     * @param worldCoord - coordinate in space
-     * @param worldMin - minimum space coordinate
-     * @param worldMax - maximum space coordinate.
-     * @param pixelMin - minimum pixel
-     * @param pixelMax - maximimum pixel.
-     * @return the pixel coordinate. */
-    private int toPixelY(double worldCoord) {
-
-        // ratio is variable that take world coordinates
-        // an creates a value proportional in pixels
-        double ratio = (HEIGHT) / (2 * spaceFieldMaxHeight);
-        double result = (worldCoord - spaceFieldMaxHeight) * ratio;
-        return (int) -result;
-    }
-
-    private double toWorldX(double pixelCoord) {
-
-        double ratio = (spaceFieldMaxWidth * 2) / (WIDTH);
-        double result = (pixelCoord) * ratio - spaceFieldMaxWidth;
-        return result;
-    }
-
-    private double toWorldY(double pixelCoord) {
-        // Ratio might be negative too.
-        double ratio = (spaceFieldMaxHeight * 2) / (HEIGHT);
-        double result = (pixelCoord) * ratio - spaceFieldMaxHeight;
-        return -result;
-    }
-
+    
     public void displayStats(Graphics g) {
         GameModel gm = GameModel.getInstance();
         g.drawString("X Velocity: " + gm.getxVelocity(), 20, 20);
@@ -196,6 +147,19 @@ public class PhysicsEngine {
         g.drawString("Sprite Position: " + gm.getX() + " " + gm.getY(), 20, 80);
         g.drawString("X Acceleration: " + xAccel, 20, 100);
         g.drawString("Y Acceleration: " + yAccel, 20, 120);
-        
+
     }
 }
+//    private double toWorldX(double pixelCoord) {
+//
+//        double ratio = (SPACEWIDTH * 2) / (WIDTH);
+//        double result = (pixelCoord) * ratio - SPACEWIDTH;
+//        return result;
+//    }
+//
+//    private double toWorldY(double pixelCoord) {
+//        // Ratio might be negative too.
+//        double ratio = (SPACEHEIGHT * 2) / (HEIGHT);
+//        double result = (pixelCoord) * ratio - SPACEHEIGHT;
+//        return -result;
+//    }

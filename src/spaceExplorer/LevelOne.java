@@ -48,7 +48,7 @@ public class LevelOne extends Level {
     @Override
     public void render(GameContainer gc, Graphics g, GameModel model) {
         g.drawImage(levelWallpaper, 0, 0);
-        g.drawImage(parent.currentAstronaut, model.getX(), model.getY());
+        g.drawImage(parent.currentAstronaut, model.getPixelX(), model.getPixelY());
         pa.displayStats(g);
     }
 
