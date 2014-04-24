@@ -29,15 +29,16 @@ public class GameModel {
     //TODO get rid of the method.
     /** Set sprite x y coordinates in pixels.
      * 
-     * @param x - x location in pixels
-     * @param y - y location in pixels */
-    public void setCoords(int x, int y) {
-        if (x > SpaceExplorer.WIDTH - Level.SPRITEWIDTH || x < 0) {
-            return;
-        }
-        if (y > SpaceExplorer.HEIGHT - Level.SPRITEHEIGHT || y < 0) {
-            return;
-        }
+     * @param x2 - x location in pixels
+     * @param y2 - y location in pixels */
+    public void setCoords(double x, double y) {
+        //TODO perform boundary checking
+        //        if (x2 > SpaceExplorer.WIDTH - Level.SPRITEWIDTH || x2 < 0) {
+//            return;
+//        }
+//        if (y2 > SpaceExplorer.HEIGHT - Level.SPRITEHEIGHT || y2 < 0) {
+//            return;
+//        }
         this.y = y;
         this.x = x;
     }

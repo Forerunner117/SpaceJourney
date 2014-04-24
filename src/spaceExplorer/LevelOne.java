@@ -12,7 +12,7 @@ public class LevelOne extends Level {
     private Image levelWallpaper;
     private Level parent = Level.getInstance();
     private State nextState;
-    private PhysicsEngine pa = new PhysicsEngine(SpaceExplorer.HEIGHT/2, SpaceExplorer.WIDTH/2, 3.2e25);
+    private SpaceEnvironment space = parent.getSpaceEnvironment();
     
     public static LevelOne getInstance() {
         if (instance == null) {
@@ -37,7 +37,7 @@ public class LevelOne extends Level {
         }
         
         
-        pa.nextPoint(model);
+        space.moveSprite(model);
         
         if (input.isKeyPressed(Input.KEY_ESCAPE)) {
             setNextState(PauseMenu.getInstance());
@@ -49,7 +49,7 @@ public class LevelOne extends Level {
     public void render(GameContainer gc, Graphics g, GameModel model) {
         g.drawImage(levelWallpaper, 0, 0);
         g.drawImage(parent.currentAstronaut, model.getPixelX(), model.getPixelY());
-        pa.displayStats(g);
+        //((PhysicsEngine) space).displayStats(g);
     }
 
     private void setNextState(State state) {
@@ -65,6 +65,7 @@ public class LevelOne extends Level {
         try {
             levelWallpaper = new Image(
                     "resources/levels/space-wallpaper-level1.jpg");
+            space.createPlanet(600, 500, 10_000);
         } catch (SlickException e) {
             throw new RuntimeException();
         }

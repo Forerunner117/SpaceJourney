@@ -21,6 +21,7 @@ public class Level extends State {
     public static final int SPRITEHEIGHT = 32;
     /** The Width of the sprite. */
     public static final int SPRITEWIDTH = 23;
+    private SpaceEnvironment spaceEnvironment = new PhysicsEngine();
 
     /** @return Singleton level instance. */
     public static Level getInstance() {
@@ -38,6 +39,12 @@ public class Level extends State {
     @Override
     public State nextState() {
         return nextState;
+    }
+
+    /** Returns the instance of the space environment. 
+     * @return the spaceEnvironment. */
+    public SpaceEnvironment getSpaceEnvironment() {
+        return spaceEnvironment;
     }
 
     @Override
@@ -67,21 +74,20 @@ public class Level extends State {
         Input input = gc.getInput();
         if (input.isKeyDown(Input.KEY_UP)) {
             currentAstronaut = astronautMan[9];
-            model.setCoords(model.getPixelX(), model.getPixelY() - 1);
+            spaceEnvironment.addKeyForce(Input.KEY_UP);
         }
         if (input.isKeyDown(Input.KEY_LEFT)) {
             currentAstronaut = astronautMan[6];
-            model.setCoords(model.getPixelX() - 1, model.getPixelY());
+            spaceEnvironment.addKeyForce(Input.KEY_LEFT);
         }
         if (input.isKeyDown(Input.KEY_RIGHT)) {
             currentAstronaut = astronautMan[3];
-            model.setCoords(model.getPixelX() + 1, model.getPixelY());
+            spaceEnvironment.addKeyForce(Input.KEY_RIGHT);
         }
         if (input.isKeyDown(Input.KEY_DOWN)) {
             currentAstronaut = astronautMan[0];
-            model.setCoords(model.getPixelX(), model.getPixelY() + 1);
-        }        
-//        model.sleep(gc.getFPS());
+            spaceEnvironment.addKeyForce(Input.KEY_DOWN);
+        }
     }
 
 }
