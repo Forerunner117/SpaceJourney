@@ -49,7 +49,7 @@ public class LevelOne extends Level {
     public void render(GameContainer gc, Graphics g, GameModel model) {
         g.drawImage(levelWallpaper, 0, 0);
         g.drawImage(parent.currentAstronaut, model.getPixelX(), model.getPixelY());
-        //((PhysicsEngine) space).displayStats(g);
+        ((PhysicsEngine) space).displayStats(g);
     }
 
     private void setNextState(State state) {
@@ -65,10 +65,10 @@ public class LevelOne extends Level {
         try {
             levelWallpaper = new Image(
                     "resources/levels/space-wallpaper-level1.jpg");
-            space.createPlanet(600, 500, 10_000);
         } catch (SlickException e) {
             throw new RuntimeException();
         }
+        space.createPlanet(600, 20, 5);
         nextState = this;
     }
 

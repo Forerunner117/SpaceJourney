@@ -10,7 +10,7 @@ import static spaceExplorer.PhysicsEngine.SPACEWIDTH;
  * @author Chris */
 public class GameModel {
     // May add player, map, ect.
-    private double x = 0, y = 0;
+    private double x = -SPACEWIDTH, y = 0;
     private static GameModel instance = null;
     private int spriteSpeed = 30;
     private double xVelocity = 0;
@@ -33,12 +33,14 @@ public class GameModel {
      * @param y2 - y location in pixels */
     public void setCoords(double x, double y) {
         //TODO perform boundary checking
-        //        if (x2 > SpaceExplorer.WIDTH - Level.SPRITEWIDTH || x2 < 0) {
-//            return;
-//        }
-//        if (y2 > SpaceExplorer.HEIGHT - Level.SPRITEHEIGHT || y2 < 0) {
-//            return;
-//        }
+     if (x > SPACEWIDTH || x < -SPACEWIDTH) {
+         xVelocity = 0;
+         return;
+        }
+        if (y > SPACEHEIGHT || y < -SPACEHEIGHT) {
+            yVelocity = 0;
+            return;
+        }
         this.y = y;
         this.x = x;
     }

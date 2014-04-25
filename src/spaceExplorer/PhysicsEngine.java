@@ -1,5 +1,7 @@
 package spaceExplorer;
 
+import static spaceExplorer.PhysicsEngine.SPACEHEIGHT;
+import static spaceExplorer.PhysicsEngine.SPACEWIDTH;
 import static spaceExplorer.SpaceExplorer.HEIGHT;
 import static spaceExplorer.SpaceExplorer.WIDTH;
 import static org.newdawn.slick.Input.KEY_UP;
@@ -20,7 +22,8 @@ import org.newdawn.slick.Graphics;
 public class PhysicsEngine implements SpaceEnvironment {
     /** Space is 72x bigger then the screen. */
     private static final double spaceFieldConstant = 72;
-    private static final double GRAV_CONST = 1000;
+    private static final double GRAV_CONST = 10;
+    private double keyAccel = .1;
     /** The width of space */
     public static final double SPACEWIDTH = spaceFieldConstant * WIDTH;
     /** The Height of Space */
@@ -29,6 +32,9 @@ public class PhysicsEngine implements SpaceEnvironment {
     private double xAccel;
     private double yAccel;
     List<Planet> planets;
+    
+    //Delete these later.
+    private double planetx, planety;
 
     /** @param x
      * @param y */
@@ -41,7 +47,11 @@ public class PhysicsEngine implements SpaceEnvironment {
      * @param mass */
     @Override
     public void createPlanet(double x, double y, double mass) {
+        double wx = toWorldX(x), wy = toWorldY(y);
         planets.add(new Planet(toWorldX(x), toWorldY(y), mass));
+        planetx = x;
+        planety = y;
+        System.out.println("Planet x, y " + wx + ", " + wy);
     }
 
     /** @param key */
@@ -49,16 +59,16 @@ public class PhysicsEngine implements SpaceEnvironment {
     public void addKeyForce(int key) {
         switch (key) {
         case KEY_UP:
-            yAccel += 10;
+            yAccel += keyAccel;
             break;
         case KEY_DOWN:
-            yAccel -= 10;
+            yAccel -= keyAccel;
             break;
         case KEY_LEFT:
-            xAccel -= 10;
+            xAccel -= keyAccel;
             break;
         case KEY_RIGHT:
-            xAccel += 10;
+            xAccel += keyAccel;
             break;
         default:
             // Ignore the key
@@ -103,7 +113,11 @@ public class PhysicsEngine implements SpaceEnvironment {
      * @param mass - mass of the star
      * @return acceleration due to gravity along the x axis */
     private double accx(double x, double starX, double mass) {
-        return GRAV_CONST * mass / (starX - x);
+        double dx = (starX - x);
+        if(dx < 10) {
+            return 0;
+        }
+        return GRAV_CONST * mass / dx;
     }
 
     /** Calculates acceleration due to gravity of the star on the the object in
@@ -116,7 +130,11 @@ public class PhysicsEngine implements SpaceEnvironment {
      * @param mass - mass of the star
      * @return acceleration due to gravity along the y axis */
     private double accy(double y, double starY, double mass) {
-        return GRAV_CONST * mass / (starY - y);
+        double dy = starY - y;
+        if(dy < 10) {
+            return 0;
+        }
+        return GRAV_CONST * mass / dy;
     }
 
     @Override
@@ -138,6 +156,32 @@ public class PhysicsEngine implements SpaceEnvironment {
         double result = (pixelCoord) * ratio - SPACEHEIGHT;
         return -result;
     }
+    
+    /** Converts space coordinate to pixel coordinate.
+     * 
+     * @param worldCoord - coordinate in space
+     * @return the pixel coordinate. */
+    private int toPixelX(double worldCoord) {
+
+        // ratio is variable that take world coordinates
+        // an creates a value proportional in pixels
+        double ratio = (WIDTH) / (2 * SPACEWIDTH);
+        double result = (worldCoord + SPACEWIDTH) * ratio;
+        return (int) result;// the int gets rid of the warning.
+    }
+
+    /** Converts space coordinate to pixel coordinate.
+     * 
+     * @param worldCoord - coordinate in space
+     * @return the pixel coordinate. */
+    private int toPixelY(double worldCoord) {
+
+        // ratio is variable that take world coordinates
+        // an creates a value proportional in pixels
+        double ratio = (HEIGHT) / (2 * SPACEHEIGHT);
+        double result = (worldCoord - SPACEHEIGHT) * ratio;
+        return (int) -result;
+    }
 
     /** Displays stats in the game window.
      * 
@@ -151,7 +195,7 @@ public class PhysicsEngine implements SpaceEnvironment {
         g.drawString("Sprite Position: " + gm.getX() + " " + gm.getY(), 20, 80);
         g.drawString("X Acceleration: " + xAccel, 20, 100);
         g.drawString("Y Acceleration: " + yAccel, 20, 120);
-
+        g.drawRoundRect((int)planetx, (int)planety, 20, 15, 10);
     }
 
 }
