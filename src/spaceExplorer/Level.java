@@ -89,5 +89,5 @@ public class Level extends State {
             spaceEnvironment.addKeyForce(Input.KEY_DOWN);
         }
     }
-
+    
 }
