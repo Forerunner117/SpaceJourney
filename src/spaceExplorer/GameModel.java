@@ -5,6 +5,8 @@ import static spaceExplorer.SpaceExplorer.WIDTH;
 import static spaceExplorer.PhysicsEngine.SPACEHEIGHT;
 import static spaceExplorer.PhysicsEngine.SPACEWIDTH;
 
+import java.awt.Rectangle;
+
 /** A class that knows various aspects of the game.
  * 
  * @author Chris */
@@ -168,5 +170,10 @@ public class GameModel {
 
     /** Do not Construct */
     private GameModel() {
+    }
+
+    public boolean hasTaco() {
+        double delta = 100;
+        Rectangle goalZone = new Rectangle(tacoX - delta/2, taco, width, height);
     }
 }

@@ -15,7 +15,7 @@ public class LevelOne extends Level {
     private Level parent = Level.getInstance();
     private State nextState;
     private SpaceEnvironment space = parent.getSpaceEnvironment();
-    
+
     public static LevelOne getInstance() {
         if (instance == null) {
             instance = new LevelOne();
@@ -30,21 +30,26 @@ public class LevelOne extends Level {
 
     @Override
     public void update(GameContainer gc, int delta, GameModel model) {
+        nextState = this;
         parent.update(gc, delta, model);
         Input input = gc.getInput();
-        if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {        
+        if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
             int x = input.getMouseX();
             int y = input.getMouseY();
             model.setCoords(x, y);
         }
-        
+
         space.orbitTaco(model);
         space.moveSprite(model);
-        
+
         if (input.isKeyPressed(Input.KEY_ESCAPE)) {
             setNextState(PauseMenu.getInstance());
         }
-        nextState = this;
+        
+        if(model.hasTaco()){
+            setNextState(LevelTwo.getInstance());
+        }
+
     }
 
     @Override
@@ -52,7 +57,8 @@ public class LevelOne extends Level {
         g.drawImage(levelWallpaper, 0, 0);
         g.drawImage(planetImage, 600, 20);
         g.drawImage(taco, model.getTacoPixelX(), model.getTacoPixelY());
-        g.drawImage(parent.currentAstronaut, model.getPixelX(), model.getPixelY());
+        g.drawImage(parent.currentAstronaut, model.getPixelX(),
+                model.getPixelY());
         ((PhysicsEngine) space).displayStats(g);
     }
 

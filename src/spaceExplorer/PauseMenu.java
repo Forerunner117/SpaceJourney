@@ -80,6 +80,7 @@ public class PauseMenu extends State {
 
     @Override
     public void update(GameContainer gc, int delta, GameModel model) {
+        nextState = this;
         Input input = gc.getInput();
         
         if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {        
@@ -98,7 +99,6 @@ public class PauseMenu extends State {
                 gc.exit();
             }
         }
-        
     }
 
 }
