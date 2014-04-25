@@ -27,4 +27,15 @@ public interface SpaceEnvironment {
 
     /** Clear all planets in the space */
     public abstract void clearPlanets();
+
+    /** Makes the taco move in a circle.
+     * 
+     * @param gm The game model */
+    public abstract void orbitTaco(GameModel gm);
+
+    /** Set the inital position of the taco
+     * 
+     * @param x x position
+     * @param y y position */
+    public abstract void registerTaco(double x, double y);
 }

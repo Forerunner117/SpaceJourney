@@ -29,12 +29,10 @@ public class PhysicsEngine implements SpaceEnvironment {
     /** The Height of Space */
     public static final double SPACEHEIGHT = spaceFieldConstant * HEIGHT;
     private final int simtime = 1;
+    private double tacoAngle;
     private double xAccel;
     private double yAccel;
     List<Planet> planets;
-    
-    //Delete these later.
-    private double planetx, planety;
 
     /** @param x
      * @param y */
@@ -49,9 +47,6 @@ public class PhysicsEngine implements SpaceEnvironment {
     public void createPlanet(double x, double y, double mass) {
         double wx = toWorldX(x), wy = toWorldY(y);
         planets.add(new Planet(toWorldX(x), toWorldY(y), mass));
-        planetx = x;
-        planety = y;
-        System.out.println("Planet x, y " + wx + ", " + wy);
     }
 
     /** @param key */
@@ -114,7 +109,7 @@ public class PhysicsEngine implements SpaceEnvironment {
      * @return acceleration due to gravity along the x axis */
     private double accx(double x, double starX, double mass) {
         double dx = (starX - x);
-        if(dx < 10) {
+        if (dx < 10) {
             return 0;
         }
         return GRAV_CONST * mass / dx;
@@ -131,10 +126,34 @@ public class PhysicsEngine implements SpaceEnvironment {
      * @return acceleration due to gravity along the y axis */
     private double accy(double y, double starY, double mass) {
         double dy = starY - y;
-        if(dy < 10) {
+        if (dy < 10) {
             return 0;
         }
         return GRAV_CONST * mass / dy;
+    }
+
+    /** Set the inital position of the taco
+     * 
+     * @param x x position in pixels
+     * @param y y position in pixels */
+    public void registerTaco(double x, double y) {
+        GameModel.getInstance().setTacoLocation(toWorldX(x), toWorldY(y));
+    }
+
+    /** Make the taco move in a circle.
+     * 
+     * @param model The game model */
+    public void orbitTaco(GameModel model) {
+        double x = model.getTacoX();
+        double y = model.getTacoY();
+        int length = 1000;
+        double angle_stepsize = 0.07;
+
+        // calculate x, y from a vector with known length and angle
+        x += length * Math.cos(tacoAngle);
+        y += length * Math.sin(tacoAngle);
+        tacoAngle += angle_stepsize;
+        model.setTacoLocation(x, y);
     }
 
     @Override
@@ -156,32 +175,6 @@ public class PhysicsEngine implements SpaceEnvironment {
         double result = (pixelCoord) * ratio - SPACEHEIGHT;
         return -result;
     }
-    
-    /** Converts space coordinate to pixel coordinate.
-     * 
-     * @param worldCoord - coordinate in space
-     * @return the pixel coordinate. */
-    private int toPixelX(double worldCoord) {
-
-        // ratio is variable that take world coordinates
-        // an creates a value proportional in pixels
-        double ratio = (WIDTH) / (2 * SPACEWIDTH);
-        double result = (worldCoord + SPACEWIDTH) * ratio;
-        return (int) result;// the int gets rid of the warning.
-    }
-
-    /** Converts space coordinate to pixel coordinate.
-     * 
-     * @param worldCoord - coordinate in space
-     * @return the pixel coordinate. */
-    private int toPixelY(double worldCoord) {
-
-        // ratio is variable that take world coordinates
-        // an creates a value proportional in pixels
-        double ratio = (HEIGHT) / (2 * SPACEHEIGHT);
-        double result = (worldCoord - SPACEHEIGHT) * ratio;
-        return (int) -result;
-    }
 
     /** Displays stats in the game window.
      * 
@@ -190,12 +183,9 @@ public class PhysicsEngine implements SpaceEnvironment {
         GameModel gm = GameModel.getInstance();
         g.drawString("X Velocity: " + gm.getxVelocity(), 20, 20);
         g.drawString("Y Velocity: " + gm.getyVelocity(), 20, 40);
-        // g.drawString("Planet Position: " + planetXpos + " " + planetYpos, 20,
-        // 60);
         g.drawString("Sprite Position: " + gm.getX() + " " + gm.getY(), 20, 80);
         g.drawString("X Acceleration: " + xAccel, 20, 100);
         g.drawString("Y Acceleration: " + yAccel, 20, 120);
-        g.drawRoundRect((int)planetx, (int)planety, 20, 15, 10);
     }
 
 }

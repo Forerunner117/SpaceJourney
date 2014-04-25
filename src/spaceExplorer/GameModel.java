@@ -15,6 +15,8 @@ public class GameModel {
     private int spriteSpeed = 30;
     private double xVelocity = 0;
     private double yVelocity = 0;
+    private double tacoX;
+    private double tacoY;
 
     /** Get singleton instance of a game model.
      * 
@@ -26,23 +28,44 @@ public class GameModel {
         return instance;
     }
 
-    //TODO get rid of the method.
+    // TODO get rid of the method.
     /** Set sprite x y coordinates in pixels.
      * 
      * @param x2 - x location in pixels
      * @param y2 - y location in pixels */
     public void setCoords(double x, double y) {
-        //TODO perform boundary checking
-     if (x > SPACEWIDTH || x < -SPACEWIDTH) {
-         xVelocity = 0;
-         return;
+        // TODO perform boundary checking
+        if (x > SPACEWIDTH || x < -SPACEWIDTH) {
+            xVelocity = 0;
+            yVelocity = 0;
+            return;
         }
         if (y > SPACEHEIGHT || y < -SPACEHEIGHT) {
+            xVelocity = 0;
             yVelocity = 0;
             return;
         }
         this.y = y;
         this.x = x;
+    }
+
+    /** Set the taco location in world coordinates.
+     * 
+     * @param x taco x
+     * @param y taco y */
+    public void setTacoLocation(double x, double y) {
+        tacoX = x;
+        tacoY = y;
+    }
+
+    /** @return the tacoX. */
+    public double getTacoX() {
+        return tacoX;
+    }
+
+    /** @return the tacoY. */
+    public double getTacoY() {
+        return tacoY;
     }
 
     /** @return the xVelocity. */
@@ -75,13 +98,26 @@ public class GameModel {
         return y;
     }
 
+    /** @return the pixel x position of the sprite */
     public int getPixelX() {
         return toPixelX(x);
     }
-    
+
+    /** @return the pixel y position of the sprite */
     public int getPixelY() {
         return toPixelY(y);
     }
+
+    /** @return the pixel x position of the taco */
+    public int getTacoPixelX() {
+        return toPixelX(tacoX);
+    }
+
+    /** @return the pixel y position of the taco */
+    public int getTacoPixelY() {
+        return toPixelY(tacoY);
+    }
+
     /** @return the spriteSpeed. */
     public int getSpriteSpeed() {
         return spriteSpeed;
