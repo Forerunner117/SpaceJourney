@@ -10,7 +10,6 @@ import org.newdawn.slick.SlickException;
 public class MainMenu extends State {
     private static MainMenu instance = null;
     private State nextState;
-    private Image levelWallpaper;    
     private Image startImg;
     private Image highScoreImg;
     private Image creditsImg;
@@ -20,6 +19,10 @@ public class MainMenu extends State {
     private Button highScoreButton;
     private Button creditsButton;
     private Button exitButton;
+    
+    
+    
+    public static Image menuWallpaper;
     
     /** @return Singleton instance of Main Menu. */
     public static MainMenu getInstance() {
@@ -63,7 +66,7 @@ public class MainMenu extends State {
     
     @Override
     public void init(GameContainer gc) throws SlickException {
-        levelWallpaper = new Image(
+        menuWallpaper = new Image(
                 "resources/levels/space-wallpaper-level1.jpg");
         startImg = new Image("resources/buttons/startButton.png");
         highScoreImg = new Image("resources/buttons/highScoreButton.png");
@@ -78,7 +81,7 @@ public class MainMenu extends State {
 
     @Override
     public void render(GameContainer gc, Graphics g, GameModel gm) {
-        g.drawImage(levelWallpaper, 0, 0);
+        g.drawImage(menuWallpaper, 0, 0);
         g.drawImage(startButton.getButtonImage(), startButton.getX(), startButton.getY());
         g.drawImage(highScoreButton.getButtonImage(), highScoreButton.getX(), highScoreButton.getY());
         g.drawImage(creditsButton.getButtonImage(), creditsButton.getX(), creditsButton.getY());

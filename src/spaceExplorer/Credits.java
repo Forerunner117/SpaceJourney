@@ -15,11 +15,12 @@ import org.newdawn.slick.TrueTypeFont;
  */
 public class Credits extends State{
     private static Credits instance = null;
-    private State nextState;
-    private Image levelWallpaper;    
+    private State nextState;    
     private Image mainMenuImg;
     private Image exitImg;
-    private TrueTypeFont trueTypeFont;
+    private TrueTypeFont trueTypeFont1;
+    private TrueTypeFont trueTypeFont2;
+    private TrueTypeFont trueTypeFont3;
 
     private Button mainMenuButton;
     private Button exitButton;
@@ -40,9 +41,7 @@ public class Credits extends State{
     /** Private constructor to initialize next state to this. 
      * @throws SlickException */
     private Credits() throws SlickException {
-        nextState = this;
-        levelWallpaper = new Image(
-                "resources/levels/space-wallpaper-level1.jpg");
+        nextState = this; 
         mainMenuImg = new Image("resources/buttons/mainMenuButton.png");
         exitImg = new Image("resources/buttons/exitButton.png");
         
@@ -50,7 +49,13 @@ public class Credits extends State{
         exitButton = new Button(568, 620, 325, 59, exitImg);
         
         Font font = new Font("Verdana", Font.BOLD, 50);
-        trueTypeFont = new TrueTypeFont(font, true);
+        trueTypeFont1 = new TrueTypeFont(font, true);
+        
+        Font font2 = new Font("Verdana", Font.BOLD, 40);
+        trueTypeFont2 = new TrueTypeFont(font2, true);
+        
+        Font font3 = new Font("Verdana", Font.BOLD, 30);
+        trueTypeFont3 = new TrueTypeFont(font3, true);
             
     }
 
@@ -77,16 +82,21 @@ public class Credits extends State{
     }
 
     @Override
-    public void render(GameContainer gc, Graphics g, GameModel gm) {
-        g.drawImage(levelWallpaper, 0, 0);
+    public void render(GameContainer gc, Graphics g, GameModel gm) {        
+        g.drawImage(MainMenu.menuWallpaper, 0, 0);
         g.drawImage(mainMenuButton.getButtonImage(), mainMenuButton.getX(), mainMenuButton.getY());
         g.drawImage(exitButton.getButtonImage(), exitButton.getX(), exitButton.getY());
         
-        trueTypeFont.drawString(340.0f, 20.0f, "Credits");
+        trueTypeFont1.drawString(340.0f, 20.0f, "Credits");
+        
+        trueTypeFont2.drawString(255.0f, 120.0f, "Game Designers");
+        trueTypeFont3.drawString(330.0f, 220.0f, "Chris Costello");
+        trueTypeFont3.drawString(334.0f, 260.0f, "Austin Longo");
     }
 
     @Override
     public void update(GameContainer gc, int delta, GameModel model) {
+        nextState = this; 
         Input input = gc.getInput();
         
         if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {        
