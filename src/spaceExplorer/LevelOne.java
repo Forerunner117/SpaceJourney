@@ -44,7 +44,7 @@ public class LevelOne extends Level {
         if (input.isKeyPressed(Input.KEY_ESCAPE)) {
             setNextState(PauseMenu.getInstance());
         }
-        
+        nextState = this;
     }
 
     @Override
