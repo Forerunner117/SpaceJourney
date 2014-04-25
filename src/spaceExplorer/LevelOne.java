@@ -30,6 +30,7 @@ public class LevelOne extends Level {
 
     @Override
     public void update(GameContainer gc, int delta, GameModel model) {
+        nextState = this;
         parent.update(gc, delta, model);
         Input input = gc.getInput();
         if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {        
@@ -44,7 +45,7 @@ public class LevelOne extends Level {
         if (input.isKeyPressed(Input.KEY_ESCAPE)) {
             setNextState(PauseMenu.getInstance());
         }
-        nextState = this;
+        
     }
 
     @Override
