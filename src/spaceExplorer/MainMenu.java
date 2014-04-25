@@ -102,7 +102,7 @@ public class MainMenu extends State {
             }
             
             if(creditsButton.checkClick(x, y)){
-                //TODO: setNextState(Credits.getInstance());
+                setNextState(Credits.getInstance());
             }
             
             if(exitButton.checkClick(x, y)){
