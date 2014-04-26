@@ -39,7 +39,7 @@ public class LevelOne extends Level {
             model.setCoords(x, y);
         }
 
-        space.orbitTaco(model);
+        //space.orbitTaco(model);
         space.moveSprite(model);
 
         if (input.isKeyPressed(Input.KEY_ESCAPE)) {

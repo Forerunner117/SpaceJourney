@@ -28,6 +28,10 @@ public class SpaceExplorer extends BasicGame {
      * 
      * @param args */
     public static void main(String[] args) {
+        if(args.length > 0) {
+            String playerName = args[0];
+            System.out.println(playerName);
+        }
         try {
             AppGameContainer app = new AppGameContainer(new SpaceExplorer());
             app.setDisplayMode(WIDTH, HEIGHT, false);
