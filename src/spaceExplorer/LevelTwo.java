@@ -10,6 +10,7 @@ import org.newdawn.slick.SlickException;
 public class LevelTwo extends Level {
     private static LevelTwo instance = null;
     private Level parent = Level.getInstance();
+    private Image planet;
     private Image levelWallpaper;
     private State nextState;
     private SpaceEnvironment space = parent.getSpaceEnvironment();
@@ -27,6 +28,8 @@ public class LevelTwo extends Level {
         g.drawImage(levelWallpaper, 0, 0);
         g.drawImage(parent.taco, model.getTacoPixelX(), model.getTacoPixelY());
         g.drawImage(parent.currentAstronaut, model.getPixelX(), model.getPixelY());
+        g.drawImage(planet, 450, 500);
+        ((PhysicsEngine)space).displayStats(g);
     }
 
     @Override
@@ -40,6 +43,10 @@ public class LevelTwo extends Level {
 
         if (input.isKeyPressed(Input.KEY_ESCAPE)) {
             setNextState(PauseMenu.getInstance());
+        }
+        
+        if (model.hasTaco()) {
+            setNextState(Credits.getInstance());
         }
     }
 
@@ -58,10 +65,12 @@ public class LevelTwo extends Level {
         try {
             levelWallpaper = new Image(
                     "resources/levels/space-wallpaper-level2.jpg");
+            planet = new Image("resources/planets/cartoon-planet-4.png");
         } catch (SlickException e) {
             throw new RuntimeException();
         }
         space.registerTaco(700, 200);
+        space.createPlanet(457, 500, 90);
     }
 
 }

@@ -14,6 +14,8 @@ public class GameModel {
     private double x = -SPACEWIDTH, y = 0;
     private static GameModel instance = null;
     private int spriteSpeed = 30;
+    private double xAccel = 0;
+    private double yAccel = 0;
     private double xVelocity = 0;
     private double yVelocity = 0;
     private double tacoX;
@@ -36,14 +38,12 @@ public class GameModel {
      * @param y2 - y location in pixels */
     public void setCoords(double x, double y) {
         // TODO perform boundary checking
-        if (x > SPACEWIDTH || x < -SPACEWIDTH) {
+        if ((y > SPACEHEIGHT || y < -SPACEHEIGHT)
+                || (x > SPACEWIDTH || x < -SPACEWIDTH)) {
             xVelocity = 0;
             yVelocity = 0;
-            return;
-        }
-        if (y > SPACEHEIGHT || y < -SPACEHEIGHT) {
-            xVelocity = 0;
-            yVelocity = 0;
+            xAccel = 0;
+            yAccel = 0;
             return;
         }
         this.y = y;
@@ -67,6 +67,26 @@ public class GameModel {
     /** @return the tacoY. */
     public double getTacoY() {
         return tacoY;
+    }
+
+    /** @param xAccel the xAccel to set. */
+    public void setxAccel(double xAccel) {
+        this.xAccel = xAccel;
+    }
+
+    /** @param yAccel the yAccel to set. */
+    public void setyAccel(double yAccel) {
+        this.yAccel = yAccel;
+    }
+
+    /** @return the xAccel. */
+    public double getxAccel() {
+        return xAccel;
+    }
+
+    /** @return the yAccel. */
+    public double getyAccel() {
+        return yAccel;
     }
 
     /** @return the xVelocity. */
@@ -130,6 +150,8 @@ public class GameModel {
         y = 0;
         xVelocity = 0;
         yVelocity = 0;
+        xAccel = 0;
+        yAccel = 0;
     }
 
     /** Converts space coordinate to pixel coordinate.
@@ -177,9 +199,9 @@ public class GameModel {
     public boolean hasTaco() {
         int delta = 9000;
         int offset = 6000;
-        
-        Rectangle goalZone = new Rectangle((int) tacoX, (int) tacoY - offset, delta,
-                delta);
+
+        Rectangle goalZone = new Rectangle((int) tacoX, (int) tacoY - offset,
+                delta, delta);
         return goalZone.contains(x, y);
     }
 }

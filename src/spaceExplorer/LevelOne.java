@@ -46,8 +46,9 @@ public class LevelOne extends Level {
         }
         
         if(model.hasTaco()){
-            setNextState(LevelTwo.getInstance());
+            space.clearPlanets();
             model.resetSprite();
+            setNextState(LevelTwo.getInstance());
         }
 
     }
@@ -79,7 +80,7 @@ public class LevelOne extends Level {
         } catch (SlickException e) {
             throw new RuntimeException();
         }
-        space.createPlanet(600, 20, 5);
+        space.createPlanet(630, 120, 5);
         space.registerTaco(700, 600);
         nextState = this;
     }

@@ -30,8 +30,6 @@ public class PhysicsEngine implements SpaceEnvironment {
     public static final double SPACEHEIGHT = spaceFieldConstant * HEIGHT;
     private final int simtime = 1;
     private double tacoAngle;
-    private double xAccel;
-    private double yAccel;
     List<Planet> planets;
 
     /** @param x
@@ -45,25 +43,29 @@ public class PhysicsEngine implements SpaceEnvironment {
      * @param mass */
     @Override
     public void createPlanet(double x, double y, double mass) {
-        double wx = toWorldX(x), wy = toWorldY(y);
         planets.add(new Planet(toWorldX(x), toWorldY(y), mass));
+        System.out.println("Added planet at " + x + " " + y);
+        System.out.println("In world " + toWorldX(x) + " " + toWorldY(y));
     }
 
     /** @param key */
     @Override
     public void addKeyForce(int key) {
+        GameModel gm = GameModel.getInstance();
+        double yAccel = gm.getyAccel();
+        double xAccel = gm.getxAccel();
         switch (key) {
         case KEY_UP:
-            yAccel += keyAccel;
+            gm.setyAccel(yAccel += keyAccel);
             break;
         case KEY_DOWN:
-            yAccel -= keyAccel;
+            gm.setyAccel(yAccel -= keyAccel);
             break;
         case KEY_LEFT:
-            xAccel -= keyAccel;
+            gm.setxAccel(xAccel -= keyAccel);
             break;
         case KEY_RIGHT:
-            xAccel += keyAccel;
+            gm.setxAccel(xAccel += keyAccel);
             break;
         default:
             // Ignore the key
@@ -79,10 +81,16 @@ public class PhysicsEngine implements SpaceEnvironment {
         double x = gm.getX();
         double vx = gm.getxVelocity();
         double vy = gm.getyVelocity();
+        double xAccel = gm.getxAccel();
+        double yAccel = gm.getyAccel();
 
         for (Planet p : planets) {
-            xAccel += accx(x, p.getPlanetX(), p.getPlanetMass());
-            yAccel += accy(y, p.getPlanetY(), p.getPlanetMass());
+             xAccel += accx(x, p.getPlanetX(), p.getPlanetMass());
+             yAccel += accy(y, p.getPlanetY(), p.getPlanetMass());
+//            xAccel += newaccX(x - p.getPlanetX(), y - p.getPlanetY(),
+//                    p.getPlanetMass());
+//            yAccel += newaccY(x - p.getPlanetX(), y - p.getPlanetY(),
+//                    p.getPlanetMass());
         }
 
         vx += simtime * xAccel;
@@ -93,9 +101,35 @@ public class PhysicsEngine implements SpaceEnvironment {
 
         gm.setxVelocity(vx);
         gm.setyVelocity(vy);
-
+        gm.setxAccel(xAccel);
+        gm.setyAccel(yAccel);
+        System.out.println("sprite width in world "
+                + toWorldX(Level.SPRITEWIDTH) + " sprite height in world "
+                + toWorldY(Level.SPRITEHEIGHT));
         gm.setCoords(x, y);
 
+    }
+
+    private double newaccX(double dx, double dy, double mass) {
+        if (Math.abs(dx) < 10) {
+            System.out.println("returning 0 for x accel");
+            return 0;
+        }
+        double denom = dx + dy;
+        System.out.println("denom = " + denom + " mass is " + mass + " dx= "
+                + dx + " Result= " + (GRAV_CONST * mass * dx / denom));
+        return GRAV_CONST * mass * dx / denom;
+    }
+
+    private double newaccY(double dx, double dy, double mass) {
+        if (Math.abs(dy) < 10) {
+            System.out.println("returning 0 for y accel");
+            return 0;
+        }
+        double denom = dx + dy;
+        System.out.println("denom = " + denom + " mass is " + mass + " dy= "
+                + dx + " Result= " + (GRAV_CONST * mass * dy / denom));
+        return GRAV_CONST * mass * dy / denom;
     }
 
     /** Calculates acceleration due to gravity of the star on the the object in
@@ -109,7 +143,7 @@ public class PhysicsEngine implements SpaceEnvironment {
      * @return acceleration due to gravity along the x axis */
     private double accx(double x, double starX, double mass) {
         double dx = (starX - x);
-        if (dx < 10) {
+        if (Math.abs(dx) < 1) {
             return 0;
         }
         return GRAV_CONST * mass / dx;
@@ -126,7 +160,7 @@ public class PhysicsEngine implements SpaceEnvironment {
      * @return acceleration due to gravity along the y axis */
     private double accy(double y, double starY, double mass) {
         double dy = starY - y;
-        if (dy < 10) {
+        if (Math.abs(dy) < 1) {
             return 0;
         }
         return GRAV_CONST * mass / dy;
@@ -183,9 +217,11 @@ public class PhysicsEngine implements SpaceEnvironment {
         GameModel gm = GameModel.getInstance();
         g.drawString("X Velocity: " + gm.getxVelocity(), 20, 20);
         g.drawString("Y Velocity: " + gm.getyVelocity(), 20, 40);
-        g.drawString("Sprite Position: " + gm.getX() + " " + gm.getY(), 20, 80);
-        g.drawString("X Acceleration: " + xAccel, 20, 100);
-        g.drawString("Y Acceleration: " + yAccel, 20, 120);
+        g.drawString(
+                "Sprite Position: " + gm.getPixelX() + " " + gm.getPixelY(),
+                20, 80);
+        g.drawString("X Acceleration: " + gm.getxAccel(), 20, 100);
+        g.drawString("Y Acceleration: " + gm.getyAccel(), 20, 120);
     }
 
 }
