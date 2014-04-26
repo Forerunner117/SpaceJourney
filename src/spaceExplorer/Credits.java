@@ -89,9 +89,13 @@ public class Credits extends State{
         
         trueTypeFont1.drawString(340.0f, 20.0f, "Credits");
         
-        trueTypeFont2.drawString(255.0f, 120.0f, "Game Designers");
+        trueTypeFont2.drawString(255.0f, 150.0f, "Game Designers");
         trueTypeFont3.drawString(330.0f, 220.0f, "Chris Costello");
-        trueTypeFont3.drawString(334.0f, 260.0f, "Austin Longo");
+        trueTypeFont3.drawString(338.0f, 260.0f, "Austin Longo");
+        
+        trueTypeFont2.drawString(200.0f, 350.0f, "Inspirational Teachers");
+        trueTypeFont3.drawString(330.0f, 420.0f, "Dana Hughes");
+        trueTypeFont3.drawString(365.0f, 460.0f, "Liz Boese");
     }
 
     @Override
