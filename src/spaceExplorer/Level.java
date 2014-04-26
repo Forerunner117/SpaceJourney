@@ -17,6 +17,7 @@ public class Level extends State {
     private State nextState;
     protected Image[] astronautMan = new Image[12];
     protected Image currentAstronaut;
+    protected Image taco;
     /** The height of the sprite. */
     public static final int SPRITEHEIGHT = 32;
     /** The Width of the sprite. */
@@ -61,6 +62,7 @@ public class Level extends State {
         astronautMan[9] = new Image("resources/astronautMan/backStand.png");
         astronautMan[10] = new Image("resources/astronautMan/backRight.png");
         astronautMan[11] = new Image("resources/astronautMan/backStand.png");
+        taco = new Image("resources/planets/taco.png");
         currentAstronaut = astronautMan[0];
     }
 

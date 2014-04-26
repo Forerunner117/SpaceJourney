@@ -11,7 +11,6 @@ public class LevelOne extends Level {
     private static LevelOne instance = null;
     private Image levelWallpaper;
     private Image planetImage;
-    private Image taco;
     private Level parent = Level.getInstance();
     private State nextState;
     private SpaceEnvironment space = parent.getSpaceEnvironment();
@@ -48,6 +47,7 @@ public class LevelOne extends Level {
         
         if(model.hasTaco()){
             setNextState(LevelTwo.getInstance());
+            model.resetSprite();
         }
 
     }
@@ -56,7 +56,7 @@ public class LevelOne extends Level {
     public void render(GameContainer gc, Graphics g, GameModel model) {
         g.drawImage(levelWallpaper, 0, 0);
         g.drawImage(planetImage, 600, 20);
-        g.drawImage(taco, model.getTacoPixelX(), model.getTacoPixelY());
+        g.drawImage(parent.taco, model.getTacoPixelX(), model.getTacoPixelY());
         g.drawImage(parent.currentAstronaut, model.getPixelX(),
                 model.getPixelY());
         ((PhysicsEngine) space).displayStats(g);
@@ -76,7 +76,6 @@ public class LevelOne extends Level {
             levelWallpaper = new Image(
                     "resources/levels/space-wallpaper-level1.jpg");
             planetImage = new Image("resources/planets/cartoon-planet.png");
-            taco = new Image("resources/planets/taco.png");
         } catch (SlickException e) {
             throw new RuntimeException();
         }

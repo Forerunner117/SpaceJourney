@@ -5,6 +5,7 @@ import static spaceExplorer.SpaceExplorer.WIDTH;
 import static spaceExplorer.PhysicsEngine.SPACEHEIGHT;
 import static spaceExplorer.PhysicsEngine.SPACEWIDTH;
 import java.awt.Rectangle;
+
 /** A class that knows various aspects of the game.
  * 
  * @author Chris */
@@ -123,9 +124,12 @@ public class GameModel {
         return spriteSpeed;
     }
 
-    /** @param spriteSpeed the spriteSpeed to set. */
-    public void setSpriteSpeed(int spriteSpeed) {
-        this.spriteSpeed = spriteSpeed;
+    /** Resets the sprite position and velocity */
+    public void resetSprite() {
+        x = -SPACEWIDTH;
+        y = 0;
+        xVelocity = 0;
+        yVelocity = 0;
     }
 
     /** Converts space coordinate to pixel coordinate.
@@ -172,7 +176,9 @@ public class GameModel {
 
     public boolean hasTaco() {
         int delta = 9000;
-        Rectangle goalZone = new Rectangle((int)tacoX, (int)tacoY, delta, delta);
+        int offset = 6000;
+        Rectangle goalZone = new Rectangle((int) tacoX, (int) tacoY - offset, delta,
+                delta);
         return goalZone.contains(x, y);
     }
 }
