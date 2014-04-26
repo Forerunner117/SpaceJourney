@@ -177,6 +177,7 @@ public class GameModel {
     public boolean hasTaco() {
         int delta = 9000;
         int offset = 6000;
+        
         Rectangle goalZone = new Rectangle((int) tacoX, (int) tacoY - offset, delta,
                 delta);
         return goalZone.contains(x, y);
