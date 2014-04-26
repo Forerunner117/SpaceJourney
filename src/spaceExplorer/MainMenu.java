@@ -43,7 +43,7 @@ public class MainMenu extends State {
         nextState = this;
         
         /*levelWallpaper = new Image(
-                "resources/levels/space-wallpaper-level1.jpg");
+                "resources/levels/space-wallpaper-menu.jpg");
         startImg = new Image("resources/buttons/startButton.png");
         highScoreImg = new Image("resources/buttons/highScoreButton.png");
         creditsImg = new Image("resources/buttons/creditsButton.png");
@@ -67,7 +67,7 @@ public class MainMenu extends State {
     @Override
     public void init(GameContainer gc) throws SlickException {
         menuWallpaper = new Image(
-                "resources/levels/space-wallpaper-level1.jpg");
+                "resources/levels/space-wallpaper-menu.jpg");
         startImg = new Image("resources/buttons/startButton.png");
         highScoreImg = new Image("resources/buttons/highScoreButton.png");
         creditsImg = new Image("resources/buttons/creditsButton.png");

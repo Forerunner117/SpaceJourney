@@ -60,7 +60,7 @@ public class PauseMenu extends State {
     public void init(GameContainer gc) throws SlickException {
         
         /*levelWallpaper = new Image(
-                "resources/levels/space-wallpaper-level1.jpg");
+                "resources/levels/space-wallpaper-menu.jpg");
         resumeImg = new Image("resources/buttons/resumeButton.png");
         mainMenuImg = new Image("resources/buttons/mainMenuButton.png");
         exitImg = new Image("resources/buttons/exitButton.png");
