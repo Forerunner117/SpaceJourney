@@ -17,10 +17,6 @@ import java.util.List;
  *
  */
 public class HighScoreTracker {
-    public static String csvFile = "/home/austin/Dropbox/eclipse/spaceExplorer/src/spaceExplorer/HighScores.csv";
-    public static BufferedReader br = null;
-    public static String line = "";
-    public static String csvSplitBy = ",";
     
     /**
      * Method for writing new scores to a local CSV file.
@@ -33,13 +29,16 @@ public class HighScoreTracker {
      * Method for reading high scores from a local CSV file.
      */
     public static String[] readScores(){
+        String csvFile = "/home/austin/Dropbox/eclipse/spaceExplorer/src/spaceExplorer/HighScores.csv";
+        String line = "";
+        String csvSplitBy = ",";
         String[] bestScores = new String[4];
         int bestTime1 = 1000000000;
         int bestTime2 = 1000000000;
         
-        try {
+        try(BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
             
-            br = new BufferedReader(new FileReader(csvFile));
+            
             while ((line = br.readLine()) != null) {      
                     String[] score = line.split(csvSplitBy);
                     
@@ -63,19 +62,9 @@ public class HighScoreTracker {
 
             }
 
-        } catch (FileNotFoundException e) {
-                e.printStackTrace();
         } catch (IOException e) {
                 e.printStackTrace();
-        } finally {
-            if (br != null) {
-                try {
-                        br.close();
-                } catch (IOException e) {
-                        e.printStackTrace();
-                }
-            }
-        }  
+        }
         
         return bestScores;
     }//END readScores()
