@@ -33,14 +33,13 @@ public class LevelOne extends Level {
         parent.update(gc, delta, model);
         Input input = gc.getInput();
 
-        //space.orbitTaco(model);
         space.moveSprite(model);
-        
+
         if (input.isKeyPressed(Input.KEY_ESCAPE)) {
             setNextState(PauseMenu.getInstance());
         }
-        
-        if(model.hasTaco()){
+
+        if (model.hasTaco()) {
             space.clearPlanets();
             model.resetSprite();
             setNextState(LevelTwo.getInstance());
@@ -55,8 +54,6 @@ public class LevelOne extends Level {
         g.drawImage(parent.taco, model.getTacoPixelX(), model.getTacoPixelY());
         g.drawImage(parent.currentAstronaut, model.getPixelX(),
                 model.getPixelY());
-        ((PhysicsEngine) space).displayStats(g);
-
     }
 
     private void setNextState(State state) {

@@ -7,8 +7,6 @@ import static spaceExplorer.PhysicsEngine.SPACEWIDTH;
 
 import java.awt.Rectangle;
 
-import org.newdawn.slick.Graphics;
-
 /** A class that knows various aspects of the game.
  * 
  * @author Chris */
@@ -16,7 +14,7 @@ public class GameModel {
     // May add player, map, ect.
     private double x = -SPACEWIDTH, y = 0;
     private static GameModel instance = null;
-    private static String playerName;
+    private String playerName;
     private int spriteSpeed = 30;
     private double xAccel = 0;
     private double yAccel = 0;
@@ -35,16 +33,17 @@ public class GameModel {
         return instance;
     }
 
-    /** @param player */
+    /** Sets the player name.
+     * 
+     * @param player - the player name to set */
     public void setPlayerName(String player) {
         playerName = player;
     }
 
-    // TODO get rid of the method.
-    /** Set sprite x y coordinates in pixels.
+    /** Set sprite x y coordinates.
      * 
-     * @param x2 - x location in pixels
-     * @param y2 - y location in pixels */
+     * @param x - x location in world coords
+     * @param y - y location in world coords */
     public void setCoords(double x, double y) {
         // TODO perform boundary checking
         if ((y > SPACEHEIGHT || y < -SPACEHEIGHT)
@@ -68,52 +67,52 @@ public class GameModel {
         tacoY = y;
     }
 
-    /** @return the tacoX. */
+    /** @return the taco X position in world. */
     public double getTacoX() {
         return tacoX;
     }
 
-    /** @return the tacoY. */
+    /** @return the taco Y position in world. */
     public double getTacoY() {
         return tacoY;
     }
 
-    /** @param xAccel the xAccel to set. */
+    /** @param xAccel the x Acceleration of the sprite to set. */
     public void setxAccel(double xAccel) {
         this.xAccel = xAccel;
     }
 
-    /** @param yAccel the yAccel to set. */
+    /** @param yAccel the y Acceleration of the sprite to set. */
     public void setyAccel(double yAccel) {
         this.yAccel = yAccel;
     }
 
-    /** @return the xAccel. */
+    /** @return the x Acceleration of the sprite. */
     public double getxAccel() {
         return xAccel;
     }
 
-    /** @return the yAccel. */
+    /** @return the y Acceleration of the sprite. */
     public double getyAccel() {
         return yAccel;
     }
 
-    /** @return the xVelocity. */
+    /** @return the x Velocity of the sprite. */
     public double getxVelocity() {
         return xVelocity;
     }
 
-    /** @param vx the xVelocity to set. */
+    /** @param vx the x Velocity of the sprite to set. */
     public void setxVelocity(double vx) {
         this.xVelocity = vx;
     }
 
-    /** @return the yVelocity. */
+    /** @return the y Velocity of the sprite. */
     public double getyVelocity() {
         return yVelocity;
     }
 
-    /** @param yVelocity the yVelocity to set. */
+    /** @param yVelocity the y Velocity of the sprite set. */
     public void setyVelocity(double yVelocity) {
         this.yVelocity = yVelocity;
     }
@@ -153,7 +152,7 @@ public class GameModel {
         return spriteSpeed;
     }
 
-    /** Resets the sprite position and velocity */
+    /** Resets the sprite position, velocity, and acceleration*/
     public void resetSprite() {
         x = -SPACEWIDTH;
         y = 0;
@@ -168,12 +167,9 @@ public class GameModel {
      * @param worldCoord - coordinate in space
      * @return the pixel coordinate. */
     private int toPixelX(double worldCoord) {
-
-        // ratio is variable that take world coordinates
-        // an creates a value proportional in pixels
         double ratio = (WIDTH) / (2 * SPACEWIDTH);
         double result = (worldCoord + SPACEWIDTH) * ratio;
-        return (int) result;// the int gets rid of the warning.
+        return (int) result;
     }
 
     /** Converts space coordinate to pixel coordinate.
@@ -181,36 +177,21 @@ public class GameModel {
      * @param worldCoord - coordinate in space
      * @return the pixel coordinate. */
     private int toPixelY(double worldCoord) {
-
-        // ratio is variable that take world coordinates
-        // an creates a value proportional in pixels
         double ratio = (HEIGHT) / (2 * SPACEHEIGHT);
         double result = (worldCoord - SPACEHEIGHT) * ratio;
         return (int) -result;
-    }
-
-    /** Time to sleep the thread. Useful for slowing down sprite movement.
-     * 
-     * @param fps - Current frames per second. */
-    public void sleep(int fps) {
-        int delay = fps / spriteSpeed;
-        try {
-            Thread.sleep(delay);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /** Do not Construct */
-    private GameModel() {
     }
 
     /** @return true if sprite reached the goal, false if not. */
     public boolean hasTaco() {
         int tacoWidth = 10512;
         int tacoHeight = 6768;
-        Rectangle goalZone = new Rectangle((int) tacoX, (int) tacoY - tacoHeight, tacoWidth,
-                tacoHeight);
+        Rectangle goalZone = new Rectangle((int) tacoX, (int) tacoY
+                - tacoHeight, tacoWidth, tacoHeight);
         return goalZone.contains(x, y);
+    }
+    
+    /** Do not Construct */
+    private GameModel() {
     }
 }

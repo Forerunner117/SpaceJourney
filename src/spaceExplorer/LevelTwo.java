@@ -27,9 +27,9 @@ public class LevelTwo extends Level {
     public void render(GameContainer gc, Graphics g, GameModel model) {
         g.drawImage(levelWallpaper, 0, 0);
         g.drawImage(parent.taco, model.getTacoPixelX(), model.getTacoPixelY());
-        g.drawImage(parent.currentAstronaut, model.getPixelX(), model.getPixelY());
+        g.drawImage(parent.currentAstronaut, model.getPixelX(),
+                model.getPixelY());
         g.drawImage(planet, 450, 500);
-        ((PhysicsEngine)space).displayStats(g);
     }
 
     @Override
@@ -44,7 +44,7 @@ public class LevelTwo extends Level {
         if (input.isKeyPressed(Input.KEY_ESCAPE)) {
             setNextState(PauseMenu.getInstance());
         }
-        
+
         if (model.hasTaco()) {
             setNextState(Credits.getInstance());
         }
