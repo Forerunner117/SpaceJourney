@@ -16,6 +16,7 @@ public class GameModel {
     // May add player, map, ect.
     private double x = -SPACEWIDTH, y = 0;
     private static GameModel instance = null;
+    private static String playerName;
     private int spriteSpeed = 30;
     private double xAccel = 0;
     private double yAccel = 0;
@@ -32,6 +33,13 @@ public class GameModel {
             instance = new GameModel();
         }
         return instance;
+    }
+    
+    /**
+     * @param player
+     */
+    public void setPlayerName(String player){
+        playerName = player;
     }
 
     // TODO get rid of the method.

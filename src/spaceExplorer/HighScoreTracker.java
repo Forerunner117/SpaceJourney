@@ -34,14 +34,13 @@ public class HighScoreTracker {
      */
     public static String[] readScores(){
         String[] bestScores = new String[4];
+        int bestTime1 = 1000000000;
+        int bestTime2 = 1000000000;
         
         try {
             
             br = new BufferedReader(new FileReader(csvFile));
             while ((line = br.readLine()) != null) {      
-                    int bestTime1 = 1000000000;
-                    int bestTime2 = 1000000000;                    
-                
                     String[] score = line.split(csvSplitBy);
                     
                     int level = Integer.parseInt(score[0]);                                   
@@ -54,12 +53,12 @@ public class HighScoreTracker {
                     if(level == 1 && time < bestTime1){
                         bestTime1 = time;
                         bestScores[0] = player;
-                        bestScores[1] = Integer.toString(time);
+                        bestScores[1] = Integer.toString(time/1000);
                     }
                     else if(level == 2 && time < bestTime2){
                         bestTime2 = time;
                         bestScores[2] = player;
-                        bestScores[3] = Integer.toString(time);
+                        bestScores[3] = Integer.toString(time/1000);
                     }
 
             }

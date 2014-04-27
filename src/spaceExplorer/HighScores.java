@@ -86,12 +86,10 @@ public class HighScores extends State{
         trueTypeFont1.drawString(340.0f, 20.0f, "High Scores");
         
         trueTypeFont2.drawString(255.0f, 150.0f, "Level 1");
-        trueTypeFont3.drawString(330.0f, 220.0f, highScores[0]);
-        trueTypeFont3.drawString(338.0f, 260.0f, highScores[1]);
+        trueTypeFont3.drawString(330.0f, 220.0f, highScores[0] + "   " + highScores[1]+"sec");        
         
         trueTypeFont2.drawString(200.0f, 350.0f, "Level 2");
-        trueTypeFont3.drawString(330.0f, 420.0f, highScores[2]);
-        trueTypeFont3.drawString(365.0f, 460.0f, highScores[3]);
+        trueTypeFont3.drawString(330.0f, 420.0f, highScores[2] + "   " + highScores[3]+"sec");        
     }
 
     @Override
