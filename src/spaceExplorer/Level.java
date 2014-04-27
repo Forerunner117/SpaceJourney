@@ -8,7 +8,7 @@ import org.newdawn.slick.SlickException;
 
 // Should update automatically
 
-/** The Level Class. Where the game fun happens. Will possibly be subclassed by
+/** The Level Class. Where the game fun happens. Will possibly be sub-classed by
  * other levels in the future.
  * 
  * @author Chris */
@@ -51,17 +51,9 @@ public class Level extends State {
     @Override
     public void init(GameContainer gc) throws SlickException {
         astronautMan[0] = new Image("resources/astronautMan/frontStand.png");
-        astronautMan[1] = new Image("resources/astronautMan/forLeft.png");
-        astronautMan[2] = new Image("resources/astronautMan/forRight.png");
         astronautMan[3] = new Image("resources/astronautMan/rightStand.png");
-        astronautMan[4] = new Image("resources/astronautMan/rightRight.png");
-        astronautMan[5] = new Image("resources/astronautMan/rightLeft.png");
         astronautMan[6] = new Image("resources/astronautMan/leftStand.png");
-        astronautMan[7] = new Image("resources/astronautMan/leftRight.png");
-        astronautMan[8] = new Image("resources/astronautMan/leftStand.png");
         astronautMan[9] = new Image("resources/astronautMan/backStand.png");
-        astronautMan[10] = new Image("resources/astronautMan/backRight.png");
-        astronautMan[11] = new Image("resources/astronautMan/backStand.png");
         taco = new Image("resources/planets/taco.png");
         currentAstronaut = astronautMan[0];
     }

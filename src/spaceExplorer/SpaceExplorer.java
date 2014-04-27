@@ -8,7 +8,9 @@ import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
-/** @author Chris */
+/** The Launching point for the game.
+ * 
+ * @author Chris */
 public class SpaceExplorer extends BasicGame {
 
     /** The width of the window. */
@@ -26,18 +28,23 @@ public class SpaceExplorer extends BasicGame {
         model = GameModel.getInstance();
     }
 
-    /** Start Game here
+    /** Start Game and get input here
      * 
-     * @param args */
+     * @param args Command line arguments */
     public static void main(String[] args) {
-        Scanner reader = new Scanner(System.in);
-        System.out.println("Enter your name: ");                
-        String playerName = reader.nextLine();
-        GameModel.getInstance().setPlayerName(playerName);
-        
-        if(reader != null)
-            reader.close();
-        
+        // Process name input.
+        if (args.length < 1) {
+            Scanner reader = new Scanner(System.in);
+            System.out.println("Enter your name: ");
+            String playerName = reader.nextLine();
+            GameModel.getInstance().setPlayerName(playerName);
+            if (reader != null) {
+                reader.close();
+            }
+        } else {
+            GameModel.getInstance().setPlayerName(args[0]);
+        }
+        // Start the game.
         try {
             AppGameContainer app = new AppGameContainer(new SpaceExplorer());
             app.setDisplayMode(WIDTH, HEIGHT, false);

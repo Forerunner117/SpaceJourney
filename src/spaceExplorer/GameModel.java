@@ -9,7 +9,8 @@ import java.awt.Rectangle;
 
 /** A class that knows various aspects of the game.
  * 
- * @author Chris */
+ * @author Chris
+ * @author Austin */
 public class GameModel {
     // May add player, map, ect.
     private double x = -SPACEWIDTH, y = 0;
