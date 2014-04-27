@@ -4,7 +4,10 @@ import static spaceExplorer.SpaceExplorer.HEIGHT;
 import static spaceExplorer.SpaceExplorer.WIDTH;
 import static spaceExplorer.PhysicsEngine.SPACEHEIGHT;
 import static spaceExplorer.PhysicsEngine.SPACEWIDTH;
+
 import java.awt.Rectangle;
+
+import org.newdawn.slick.Graphics;
 
 /** A class that knows various aspects of the game.
  * 
@@ -196,12 +199,16 @@ public class GameModel {
     private GameModel() {
     }
 
-    public boolean hasTaco() {
+    public boolean hasTaco(Graphics g) {
         int delta = 9000;
+        int width = 5040;
+        int height = 3240;
         int offset = 6000;
-
-        Rectangle goalZone = new Rectangle((int) tacoX, (int) tacoY - offset,
-                delta, delta);
+        Rectangle goalZone = new Rectangle((int) tacoX, (int) tacoY,
+                width, height);
+        g.drawRect((float)tacoX, (float)tacoY, 70, 52);
+//        Rectangle goalZone = new Rectangle((int) tacoX, (int) tacoY - offset,
+//                delta, delta);
         return goalZone.contains(x, y);
     }
 }

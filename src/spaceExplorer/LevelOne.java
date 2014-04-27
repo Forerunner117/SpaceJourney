@@ -45,11 +45,11 @@ public class LevelOne extends Level {
             setNextState(PauseMenu.getInstance());
         }
         
-        if(model.hasTaco()){
-            space.clearPlanets();
-            model.resetSprite();
-            setNextState(LevelTwo.getInstance());
-        }
+//        if(model.hasTaco()){
+//            space.clearPlanets();
+//            model.resetSprite();
+//            setNextState(LevelTwo.getInstance());
+//        }
 
     }
 
@@ -61,6 +61,11 @@ public class LevelOne extends Level {
         g.drawImage(parent.currentAstronaut, model.getPixelX(),
                 model.getPixelY());
         ((PhysicsEngine) space).displayStats(g);
+        if(model.hasTaco(g)){
+            space.clearPlanets();
+            model.resetSprite();
+            setNextState(LevelTwo.getInstance());
+        }
     }
 
     private void setNextState(State state) {
