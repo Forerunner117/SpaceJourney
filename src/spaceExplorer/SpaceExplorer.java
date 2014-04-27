@@ -31,6 +31,7 @@ public class SpaceExplorer extends BasicGame {
         if(args.length > 0) {
             String playerName = args[0];
             System.out.println(playerName);
+            //model.setPlayerName(playerName);
         }
         try {
             AppGameContainer app = new AppGameContainer(new SpaceExplorer());
