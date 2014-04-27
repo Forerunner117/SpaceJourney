@@ -35,7 +35,7 @@ public class LevelOne extends Level {
 
         //space.orbitTaco(model);
         space.moveSprite(model);
-
+        
         if (input.isKeyPressed(Input.KEY_ESCAPE)) {
             setNextState(PauseMenu.getInstance());
         }
@@ -56,6 +56,7 @@ public class LevelOne extends Level {
         g.drawImage(parent.currentAstronaut, model.getPixelX(),
                 model.getPixelY());
         ((PhysicsEngine) space).displayStats(g);
+
     }
 
     private void setNextState(State state) {
