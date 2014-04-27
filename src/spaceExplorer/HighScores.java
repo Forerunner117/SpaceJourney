@@ -59,8 +59,6 @@ public class HighScores extends State{
         
         Font font3 = new Font("Verdana", Font.BOLD, 30);
         trueTypeFont3 = new TrueTypeFont(font3, true);
-        
-        highScores = HighScoreTracker.readScores();    
     }
 
     @Override

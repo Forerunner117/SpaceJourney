@@ -29,16 +29,14 @@ public class HighScoreTracker {
      * Method for reading high scores from a local CSV file.
      */
     public static String[] readScores(){
-        String csvFile = "/home/austin/Dropbox/eclipse/spaceExplorer/src/spaceExplorer/HighScores.csv";
+        String csvFile = "resources/HighScores.csv";
         String line = "";
         String csvSplitBy = ",";
         String[] bestScores = new String[4];
         int bestTime1 = 1000000000;
         int bestTime2 = 1000000000;
         
-        try(BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
-            
-            
+        try(BufferedReader br = new BufferedReader(new FileReader(new File(csvFile).getAbsolutePath()))){         
             while ((line = br.readLine()) != null) {      
                     String[] score = line.split(csvSplitBy);
                     
