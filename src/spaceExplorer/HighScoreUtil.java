@@ -1,14 +1,20 @@
 package spaceExplorer;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.newdawn.slick.geom.Path;
 
 
 
@@ -16,12 +22,20 @@ import java.util.List;
  * @author austin
  *
  */
-public class HighScoreTracker {
-    
+public class HighScoreUtil {
     /**
      * Method for writing new scores to a local CSV file.
      */
-    public void addScore(){
+    public static void addScore(String level, String player, String time){
+        String csvFile = "resources/HighScores.csv";
+        
+        String newScore = level + "," + player + "," + time;
+        
+        try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(csvFile, true)))) {
+            out.println(newScore);
+        }catch (IOException e) {
+            //exception handling left as an exercise for the reader
+        }
         
     }
     

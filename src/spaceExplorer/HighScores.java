@@ -36,7 +36,8 @@ public class HighScores extends State{
                 e.printStackTrace();
             }
         }
-        highScores = HighScoreTracker.readScores();
+        highScores = HighScoreUtil.readScores();
+        HighScoreUtil.addScore("1", "Dana", "9000");
                 
         return instance;
     }
