@@ -37,7 +37,6 @@ public class HighScores extends State{
             }
         }
         highScores = HighScoreUtil.readScores();
-        HighScoreUtil.addScore("1", "Dana", "9000");
                 
         return instance;
     }

@@ -14,11 +14,16 @@ public class LevelOne extends Level {
     private Level parent = Level.getInstance();
     private State nextState;
     private SpaceEnvironment space = parent.getSpaceEnvironment();
+    private static double startTime;
+    private double stopTime;
+    private double totalTime;
 
     public static LevelOne getInstance() {
         if (instance == null) {
             instance = new LevelOne();
         }
+        
+        startTime = System.currentTimeMillis();
         return instance;
     }
 
@@ -40,6 +45,11 @@ public class LevelOne extends Level {
         }
 
         if (model.hasTaco()) {
+            //stop the clock and add the new score to the CSV file
+            stopTime = System.currentTimeMillis();
+            totalTime = stopTime-startTime;
+            HighScoreUtil.addScore(Integer.toString(1), model.getPlayerName(), Integer.toString((int)totalTime));
+                        
             space.clearPlanets();
             model.resetSprite();
             setNextState(LevelTwo.getInstance());

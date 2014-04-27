@@ -1,5 +1,7 @@
 package spaceExplorer;
 
+import java.util.Scanner;
+
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.BasicGame;
@@ -28,11 +30,14 @@ public class SpaceExplorer extends BasicGame {
      * 
      * @param args */
     public static void main(String[] args) {
-        if(args.length > 0) {
-            String playerName = args[0];
-            System.out.println(playerName);
-            //model.setPlayerName(playerName);
-        }
+        Scanner reader = new Scanner(System.in);
+        System.out.println("Enter your name: ");                
+        String playerName = reader.nextLine();
+        GameModel.getInstance().setPlayerName(playerName);
+        
+        if(reader != null)
+            reader.close();
+        
         try {
             AppGameContainer app = new AppGameContainer(new SpaceExplorer());
             app.setDisplayMode(WIDTH, HEIGHT, false);
