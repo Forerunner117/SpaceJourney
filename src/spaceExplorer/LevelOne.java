@@ -32,11 +32,6 @@ public class LevelOne extends Level {
         nextState = this;
         parent.update(gc, delta, model);
         Input input = gc.getInput();
-        if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-            int x = input.getMouseX();
-            int y = input.getMouseY();
-            model.setCoords(x, y);
-        }
 
         //space.orbitTaco(model);
         space.moveSprite(model);
@@ -45,11 +40,11 @@ public class LevelOne extends Level {
             setNextState(PauseMenu.getInstance());
         }
         
-//        if(model.hasTaco()){
-//            space.clearPlanets();
-//            model.resetSprite();
-//            setNextState(LevelTwo.getInstance());
-//        }
+        if(model.hasTaco()){
+            space.clearPlanets();
+            model.resetSprite();
+            setNextState(LevelTwo.getInstance());
+        }
 
     }
 
@@ -61,11 +56,6 @@ public class LevelOne extends Level {
         g.drawImage(parent.currentAstronaut, model.getPixelX(),
                 model.getPixelY());
         ((PhysicsEngine) space).displayStats(g);
-        if(model.hasTaco(g)){
-            space.clearPlanets();
-            model.resetSprite();
-            setNextState(LevelTwo.getInstance());
-        }
     }
 
     private void setNextState(State state) {

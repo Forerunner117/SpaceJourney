@@ -44,8 +44,6 @@ public class PhysicsEngine implements SpaceEnvironment {
     @Override
     public void createPlanet(double x, double y, double mass) {
         planets.add(new Planet(toWorldX(x), toWorldY(y), mass));
-        System.out.println("Added planet at " + x + " " + y);
-        System.out.println("In world " + toWorldX(x) + " " + toWorldY(y));
     }
 
     /** @param key */
@@ -103,9 +101,6 @@ public class PhysicsEngine implements SpaceEnvironment {
         gm.setyVelocity(vy);
         gm.setxAccel(xAccel);
         gm.setyAccel(yAccel);
-        System.out.println("sprite width in world "
-                + toWorldX(Level.SPRITEWIDTH) + " sprite height in world "
-                + toWorldY(Level.SPRITEHEIGHT));
         gm.setCoords(x, y);
 
     }

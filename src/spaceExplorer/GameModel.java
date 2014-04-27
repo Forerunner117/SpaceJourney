@@ -34,11 +34,9 @@ public class GameModel {
         }
         return instance;
     }
-    
-    /**
-     * @param player
-     */
-    public void setPlayerName(String player){
+
+    /** @param player */
+    public void setPlayerName(String player) {
         playerName = player;
     }
 
@@ -207,16 +205,12 @@ public class GameModel {
     private GameModel() {
     }
 
-    public boolean hasTaco(Graphics g) {
-        int delta = 9000;
-        int width = 5040;
-        int height = 3240;
-        int offset = 6000;
-        Rectangle goalZone = new Rectangle((int) tacoX, (int) tacoY,
-                width, height);
-        g.drawRect((float)tacoX, (float)tacoY, 70, 52);
-//        Rectangle goalZone = new Rectangle((int) tacoX, (int) tacoY - offset,
-//                delta, delta);
+    /** @return true if sprite reached the goal, false if not. */
+    public boolean hasTaco() {
+        int tacoWidth = 10512;
+        int tacoHeight = 6768;
+        Rectangle goalZone = new Rectangle((int) tacoX, (int) tacoY - tacoHeight, tacoWidth,
+                tacoHeight);
         return goalZone.contains(x, y);
     }
 }
