@@ -22,6 +22,9 @@ public class MainMenu extends State {
     
     
     
+    /**
+     * The same wall-paper will be used for all menu screens
+     */
     public static Image menuWallpaper;
     
     /** @return Singleton instance of Main Menu. */

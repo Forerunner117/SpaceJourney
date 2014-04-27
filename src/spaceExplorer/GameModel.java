@@ -39,6 +39,13 @@ public class GameModel {
     public void setPlayerName(String player) {
         playerName = player;
     }
+    
+    /**
+     * @return player's name
+     */
+    public String getPlayerName(){
+        return playerName;
+    }
 
     /** Set sprite x y coordinates.
      * 

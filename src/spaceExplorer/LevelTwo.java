@@ -14,12 +14,17 @@ public class LevelTwo extends Level {
     private Image levelWallpaper;
     private State nextState;
     private SpaceEnvironment space = parent.getSpaceEnvironment();
+    private static double startTime;
+    private double stopTime;
+    private double totalTime;
 
     /** @return An instance of Level2 */
     public static LevelTwo getInstance() {
         if (instance == null) {
             instance = new LevelTwo();
         }
+        
+        startTime = System.currentTimeMillis();
         return instance;
     }
 
@@ -46,6 +51,11 @@ public class LevelTwo extends Level {
         }
 
         if (model.hasTaco()) {
+            //stop the clock and add the new score to the CSV file
+            stopTime = System.currentTimeMillis();
+            totalTime = stopTime-startTime;
+            HighScoreUtil.addScore(Integer.toString(2), model.getPlayerName(), Integer.toString((int)totalTime));
+            
             setNextState(Credits.getInstance());
         }
     }
