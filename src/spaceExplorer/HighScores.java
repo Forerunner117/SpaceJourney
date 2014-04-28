@@ -50,13 +50,13 @@ public class HighScores extends State {
         mainMenuButton = new Button(10, 620, 326, 59, mainMenuImg);
         exitButton = new Button(568, 620, 325, 59, exitImg);
 
-        Font font = new Font("Verdana", Font.BOLD, 50);
+        Font font = new Font("Ubuntu Medium", Font.BOLD, 50);
         trueTypeFont1 = new TrueTypeFont(font, true);
 
-        Font font2 = new Font("Verdana", Font.BOLD, 40);
+        Font font2 = new Font("Ubuntu Medium", Font.BOLD, 40);
         trueTypeFont2 = new TrueTypeFont(font2, true);
 
-        Font font3 = new Font("Verdana", Font.BOLD, 30);
+        Font font3 = new Font("Ubuntu Medium", Font.BOLD, 30);
         trueTypeFont3 = new TrueTypeFont(font3, true);
     }
 
@@ -85,14 +85,14 @@ public class HighScores extends State {
         g.drawImage(exitButton.getButtonImage(), exitButton.getX(),
                 exitButton.getY());
 
-        trueTypeFont1.drawString(340.0f, 20.0f, "High Scores");
+        trueTypeFont1.drawString(295.0f, 20.0f, "High Scores");
 
-        trueTypeFont2.drawString(255.0f, 150.0f, "Level 1");
-        trueTypeFont3.drawString(330.0f, 220.0f, highScores[0] + "   "
+        trueTypeFont2.drawString(380.0f, 150.0f, "Level 1");
+        trueTypeFont3.drawString(360.0f, 220.0f, highScores[0] + "   "
                 + highScores[1] + "sec");
 
-        trueTypeFont2.drawString(200.0f, 350.0f, "Level 2");
-        trueTypeFont3.drawString(330.0f, 420.0f, highScores[2] + "   "
+        trueTypeFont2.drawString(380.0f, 350.0f, "Level 2");
+        trueTypeFont3.drawString(360.0f, 420.0f, highScores[2] + "   "
                 + highScores[3] + "sec");
     }
 

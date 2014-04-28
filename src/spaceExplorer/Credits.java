@@ -48,13 +48,13 @@ public class Credits extends State {
         mainMenuButton = new Button(10, 620, 326, 59, mainMenuImg);
         exitButton = new Button(568, 620, 325, 59, exitImg);
 
-        Font font = new Font("Verdana", Font.BOLD, 50);
+        Font font = new Font("Ubuntu Medium", Font.BOLD, 50);
         trueTypeFont1 = new TrueTypeFont(font, true);
 
-        Font font2 = new Font("Verdana", Font.BOLD, 40);
+        Font font2 = new Font("Ubuntu Medium", Font.BOLD, 40);
         trueTypeFont2 = new TrueTypeFont(font2, true);
 
-        Font font3 = new Font("Verdana", Font.BOLD, 30);
+        Font font3 = new Font("Ubuntu Medium", Font.BOLD, 30);
         trueTypeFont3 = new TrueTypeFont(font3, true);
 
     }
@@ -86,13 +86,13 @@ public class Credits extends State {
 
         trueTypeFont1.drawString(340.0f, 20.0f, "Credits");
 
-        trueTypeFont2.drawString(255.0f, 150.0f, "Game Designers");
-        trueTypeFont3.drawString(330.0f, 220.0f, "Chris Costello");
-        trueTypeFont3.drawString(338.0f, 260.0f, "Austin Longo");
+        trueTypeFont2.drawString(270.0f, 150.0f, "Game Designers");
+        trueTypeFont3.drawString(335.0f, 220.0f, "Chris Costello");
+        trueTypeFont3.drawString(342.0f, 260.0f, "Austin Longo");
 
-        trueTypeFont2.drawString(200.0f, 350.0f, "Inspirational Teachers");
-        trueTypeFont3.drawString(330.0f, 420.0f, "Dana Hughes");
-        trueTypeFont3.drawString(365.0f, 460.0f, "Liz Boese");
+        trueTypeFont2.drawString(220.0f, 350.0f, "Inspirational Teachers");
+        trueTypeFont3.drawString(340.0f, 420.0f, "Dana Hughes");
+        trueTypeFont3.drawString(375.0f, 460.0f, "Liz Boese");
     }
 
     @Override

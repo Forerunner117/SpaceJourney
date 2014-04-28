@@ -51,9 +51,6 @@ public class HighScoreUtil {
                 String player = score[1];
                 int time = Integer.parseInt(score[2]);
 
-                System.out.println("Score [Player= " + player + " , Time="
-                        + time + "]");
-
                 if (level == 1 && time < bestTime1) {
                     bestTime1 = time;
                     bestScores[0] = player;
