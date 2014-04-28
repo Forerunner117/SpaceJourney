@@ -15,7 +15,7 @@ import org.newdawn.slick.SlickException;
 public class Level extends State {
     private static Level instance = null;
     private State nextState;
-    protected Image[] astronautMan = new Image[12];
+    protected Image[] astronautMan = new Image[4];
     protected Image currentAstronaut;
     protected Image taco;
     /** The height of the sprite. */
@@ -51,9 +51,9 @@ public class Level extends State {
     @Override
     public void init(GameContainer gc) throws SlickException {
         astronautMan[0] = new Image("resources/astronautMan/frontStand.png");
-        astronautMan[3] = new Image("resources/astronautMan/rightStand.png");
-        astronautMan[6] = new Image("resources/astronautMan/leftStand.png");
-        astronautMan[9] = new Image("resources/astronautMan/backStand.png");
+        astronautMan[1] = new Image("resources/astronautMan/rightStand.png");
+        astronautMan[2] = new Image("resources/astronautMan/leftStand.png");
+        astronautMan[3] = new Image("resources/astronautMan/backStand.png");
         taco = new Image("resources/planets/taco.png");
         currentAstronaut = astronautMan[0];
     }
@@ -67,15 +67,15 @@ public class Level extends State {
     public void update(GameContainer gc, int delta, GameModel model) {
         Input input = gc.getInput();
         if (input.isKeyDown(Input.KEY_UP)) {
-            currentAstronaut = astronautMan[9];
+            currentAstronaut = astronautMan[3];
             spaceEnvironment.addKeyForce(Input.KEY_UP);
         }
         if (input.isKeyDown(Input.KEY_LEFT)) {
-            currentAstronaut = astronautMan[6];
+            currentAstronaut = astronautMan[2];
             spaceEnvironment.addKeyForce(Input.KEY_LEFT);
         }
         if (input.isKeyDown(Input.KEY_RIGHT)) {
-            currentAstronaut = astronautMan[3];
+            currentAstronaut = astronautMan[1];
             spaceEnvironment.addKeyForce(Input.KEY_RIGHT);
         }
         if (input.isKeyDown(Input.KEY_DOWN)) {

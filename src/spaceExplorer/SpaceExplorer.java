@@ -1,5 +1,6 @@
 package spaceExplorer;
 
+import java.io.File;
 import java.util.Scanner;
 
 import org.newdawn.slick.AppGameContainer;
@@ -7,6 +8,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.lwjgl.LWJGLUtil;
 
 /** The Launching point for the game.
  * 
@@ -32,6 +34,12 @@ public class SpaceExplorer extends BasicGame {
      * 
      * @param args Command line arguments */
     public static void main(String[] args) {
+        // For system independence
+        System.setProperty("org.lwjgl.librarypath",
+                new File(new File(System.getProperty("user.dir"), "lib/lwjgl-2.9.1/native"),
+                        LWJGLUtil.getPlatformName()).getAbsolutePath());
+        System.setProperty("net.java.games.input.librarypath",
+                System.getProperty("org.lwjgl.librarypath"));
         // Process name input.
         if (args.length < 1) {
             Scanner reader = new Scanner(System.in);
