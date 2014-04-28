@@ -6,7 +6,10 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
-/** @author Chris */
+/** Level 1 of the Game
+ * 
+ * @author Chris
+ * @author Austin */
 public class LevelOne extends Level {
     private static LevelOne instance = null;
     private Image levelWallpaper;
@@ -18,11 +21,12 @@ public class LevelOne extends Level {
     private double stopTime;
     private double totalTime;
 
+    /** @return An instance of level 1. */
     public static LevelOne getInstance() {
         if (instance == null) {
             instance = new LevelOne();
         }
-        
+
         startTime = System.currentTimeMillis();
         return instance;
     }
@@ -45,11 +49,12 @@ public class LevelOne extends Level {
         }
 
         if (model.hasTaco()) {
-            //stop the clock and add the new score to the CSV file
+            // stop the clock and add the new score to the CSV file
             stopTime = System.currentTimeMillis();
-            totalTime = stopTime-startTime;
-            HighScoreUtil.addScore(Integer.toString(1), model.getPlayerName(), Integer.toString((int)totalTime));
-                        
+            totalTime = stopTime - startTime;
+            HighScoreUtil.addScore(Integer.toString(1), model.getPlayerName(),
+                    Integer.toString((int) totalTime));
+
             space.clearPlanets();
             model.resetSprite();
             setNextState(LevelTwo.getInstance());
@@ -66,6 +71,9 @@ public class LevelOne extends Level {
                 model.getPixelY());
     }
 
+    /** Sets the next state.
+     * 
+     * @param state the next state to set. */
     private void setNextState(State state) {
         nextState = state;
     }
@@ -75,6 +83,7 @@ public class LevelOne extends Level {
         return nextState;
     }
 
+    /** Load the images and create the level. */
     private LevelOne() {
         try {
             levelWallpaper = new Image(

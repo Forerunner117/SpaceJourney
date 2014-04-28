@@ -33,7 +33,7 @@ public interface SpaceEnvironment {
      * @param gm The game model */
     public abstract void orbitTaco(GameModel gm);
 
-    /** Set the inital position of the taco
+    /** Set the initial position of the taco
      * 
      * @param x x position
      * @param y y position */

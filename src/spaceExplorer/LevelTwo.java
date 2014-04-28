@@ -6,7 +6,10 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
-/** @author Chris */
+/** Level 2 of the game.
+ * 
+ * @author Chris
+ * @author Austin */
 public class LevelTwo extends Level {
     private static LevelTwo instance = null;
     private Level parent = Level.getInstance();
@@ -23,7 +26,7 @@ public class LevelTwo extends Level {
         if (instance == null) {
             instance = new LevelTwo();
         }
-        
+
         startTime = System.currentTimeMillis();
         return instance;
     }
@@ -51,15 +54,19 @@ public class LevelTwo extends Level {
         }
 
         if (model.hasTaco()) {
-            //stop the clock and add the new score to the CSV file
+            // stop the clock and add the new score to the CSV file
             stopTime = System.currentTimeMillis();
-            totalTime = stopTime-startTime;
-            HighScoreUtil.addScore(Integer.toString(2), model.getPlayerName(), Integer.toString((int)totalTime));
-            
+            totalTime = stopTime - startTime;
+            HighScoreUtil.addScore(Integer.toString(2), model.getPlayerName(),
+                    Integer.toString((int) totalTime));
+
             setNextState(Credits.getInstance());
         }
     }
 
+    /** Sets the next state.
+     * 
+     * @param state the next state to set. */
     private void setNextState(State state) {
         nextState = state;
     }
@@ -69,7 +76,7 @@ public class LevelTwo extends Level {
         return nextState;
     }
 
-    /** Construct Privately */
+    /** Construct Privately. Load images and set up level. */
     private LevelTwo() {
         nextState = this;
         try {

@@ -28,7 +28,7 @@ public class PhysicsEngine implements SpaceEnvironment {
     public static final double SPACEHEIGHT = spaceFieldConstant * HEIGHT;
     private final int simtime = 1;
     private double tacoAngle;
-    List<Planet> planets;
+    private List<Planet> planets;
 
     /** Construct a physics engine. Initializes Planets. */
     public PhysicsEngine() {
@@ -184,9 +184,9 @@ public class PhysicsEngine implements SpaceEnvironment {
         return -result;
     }
 
-    /**  Displays stats in the game window.
+    /** Displays stats in the game window.
      * 
-     * @param g */
+     * @param g Graphics object */
     public void displayStats(Graphics g) {
         GameModel gm = GameModel.getInstance();
         g.drawString("X Velocity: " + gm.getxVelocity(), 20, 20);
