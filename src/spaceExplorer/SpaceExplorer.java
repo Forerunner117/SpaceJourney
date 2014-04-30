@@ -7,6 +7,7 @@ import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.lwjgl.LWJGLUtil;
 
@@ -75,6 +76,10 @@ public class SpaceExplorer extends BasicGame {
     public void init(GameContainer gc) throws SlickException {
         state.init(gc);
         Level.getInstance().init(gc);
+        
+        Music mainMusic = new Music("resources/tiesto.ogg");
+
+        mainMusic.loop();
     }
 
     /** Gets called continuously in game loop. Delegates everything.
